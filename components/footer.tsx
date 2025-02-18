@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -69,24 +70,29 @@ export const Footer = () => {
 
           <div className="flex-1">
             <h3 className="mb-3 underline underline-offset-4">Contact</h3>
-            <ul>
-              <Link
-                href="mailto:helplearnupind@gmail.com"
-                className="text-muted-foreground"
-              >
-                helplearnupind@gmail.com
-              </Link>
-              <div className="mt-1.5">
-                Address:
+            <ul className="space-y-2">
+              <div className="flex items-center gap-2">
+                <Mail className="size-4" />
+                <Link
+                  href="mailto:helplearnupind@gmail.com"
+                  className="text-muted-foreground hover:underline"
+                >
+                  helplearnupind@gmail.com
+                </Link>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="size-4" />
                 <p className="text-muted-foreground">
                   Kamrup, Guwahati, Assam - 781003
                 </p>
               </div>
-              <div className="mt-1.5">
-                Phone:
+              <div className="flex items-center gap-2">
+                <Phone className="size-4" />
                 <p className="text-muted-foreground">+91 9387736619</p>
               </div>
             </ul>
+
+            <div className="mt-5 flex gap-4">{/* Socials */}</div>
           </div>
         </div>
       </div>

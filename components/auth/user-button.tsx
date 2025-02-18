@@ -45,14 +45,11 @@ export const UserButton = () => {
           </Avatar>
           <div>
             <p className="text-sm font-semibold">{user.name}</p>
-            <p className="text-xs text-primary-foreground/80">{user.email}</p>
+            <p className="text-xs">{user.email}</p>
           </div>
         </div>
 
-        <DropdownMenuItem
-          asChild
-          className="cursor-pointer text-primary-foreground/70"
-        >
+        <DropdownMenuItem asChild className="cursor-pointer">
           <Link href="/dashboard/account" className="px-3 py-2.5">
             <Settings className="h-4 w-4 mr-3" />
             <span>Manage Account</span>
@@ -61,7 +58,7 @@ export const UserButton = () => {
         <DropdownMenuItem
           asChild
           onClick={onLogoutClick}
-          className="cursor-pointer text-primary-foreground/70"
+          className="cursor-pointer"
         >
           <div className="px-3 py-2.5">
             <LogOut className="h-4 w-4 mr-3" />

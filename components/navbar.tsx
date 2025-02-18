@@ -29,7 +29,7 @@ export const Navbar = () => {
               asChild
             >
               <Link href="/dashboard">
-                <MessageCircleMore className="size-[1.2rem]" />
+                <MessageCircleMore className="size-6" />
               </Link>
             </Button>
 
@@ -40,7 +40,7 @@ export const Navbar = () => {
               asChild
             >
               <Link href="/dashboard">
-                <Bell className="size-[1.2rem]" />
+                <Bell className="size-6" />
               </Link>
             </Button>
 
