@@ -2,6 +2,7 @@ import {
   BarChart3,
   Compass,
   Home,
+  ImagePlus,
   IndianRupee,
   Info,
   LucideIcon,
@@ -9,7 +10,6 @@ import {
   Tv,
   User,
   UsersRound,
-  Wrench,
 } from "lucide-react";
 
 type NavRoute = {
@@ -57,7 +57,6 @@ export const dashboardRoutes: NavRoute[] = [
     href: "/dashboard/affiliate",
     icon: IndianRupee,
   },
-
   {
     label: "Leaderboard",
     href: "/dashboard/leaderboard",
@@ -70,15 +69,25 @@ export const dashboardRoutes: NavRoute[] = [
   },
 ];
 
-export const adminDashboarRoutes: NavRoute[] = [
+export const studioRoutes: NavRoute[] = [
   {
     label: "Analytics",
-    href: "/admin-dashboard",
+    href: "/studio",
     icon: BarChart3,
   },
   {
-    label: "Creator access requests",
-    href: "/admin-dashboard/creator-access-requests",
-    icon: Wrench,
+    label: "Manage Media",
+    href: "/studio/media",
+    icon: ImagePlus,
+  },
+  {
+    label: "Manage Courses",
+    href: "/studio/courses",
+    icon: Tv,
+  },
+  {
+    label: "Manage User Roles",
+    href: "/studio/user-roles",
+    icon: UsersRound,
   },
 ];

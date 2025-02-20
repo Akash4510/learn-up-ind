@@ -23,7 +23,9 @@ import { ThemeToggle } from "./theme-toggle";
 export const Navbar = () => {
   const { user } = useAuth();
   const pathname = usePathname();
+
   const isDashboard = pathname.startsWith("/dashboard");
+  const isStudio = pathname.startsWith("/studio");
 
   return (
     <nav className="h-full px-4 lg:px-6 flex items-center justify-between gap-4">
@@ -35,7 +37,7 @@ export const Navbar = () => {
       </div>
 
       <div className="hidden lg:flex ml-24">
-        {!isDashboard && (
+        {!isDashboard && !isStudio && (
           <NavigationMenu>
             <NavigationMenuList>
               {mainRoutes.map((route) => (
@@ -59,7 +61,7 @@ export const Navbar = () => {
           <>
             {!isDashboard && (
               <>
-                <ThemeToggle />
+                {!isStudio && <ThemeToggle />}
 
                 <Button
                   variant="accent"

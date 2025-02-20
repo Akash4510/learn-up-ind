@@ -8,9 +8,9 @@ import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
-  adminDashboarRoutes,
   dashboardRoutes,
   mainRoutes,
+  studioRoutes,
 } from "@/constants/nav-routes";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -22,19 +22,19 @@ export const Sidebar = ({ afterNavItemClick }: SidebarProps) => {
   const pathname = usePathname();
 
   const isDashboard = pathname.startsWith("/dashboard");
-  const isAdminDashboard = pathname.startsWith("/admin-dashboard");
+  const isStudio = pathname.startsWith("/studio");
 
   let routes;
   if (isDashboard) {
     routes = dashboardRoutes;
-  } else if (isAdminDashboard) {
-    routes = adminDashboarRoutes;
+  } else if (isStudio) {
+    routes = studioRoutes;
   } else {
     routes = mainRoutes;
   }
 
   return (
-    <div className="space-y-6 flex flex-col h-full border-r">
+    <div className="space-y-6 flex flex-col w-28 h-full border-r">
       <div className="p-3 px-2.5 flex flex-col justify-between flex-1">
         <div className="space-y-2">
           {routes.map((route) => (

@@ -2,7 +2,7 @@ import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
 
-const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
+const StudioLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <header className="w-full h-16 fixed top-0 z-50 bg-background border-b">
@@ -23,4 +23,4 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default DashboardLayout;
+export default StudioLayout;
