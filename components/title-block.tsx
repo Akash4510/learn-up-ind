@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-interface HeadingProps {
+interface TitleBlockProps {
   title: string;
   subtitle?: string;
   className?: string;
@@ -8,13 +8,13 @@ interface HeadingProps {
   subtitleClassName?: string;
 }
 
-export const Heading = ({
+export const TitleBlock = ({
   title,
   subtitle,
   className,
   titleClassName,
   subtitleClassName,
-}: HeadingProps) => {
+}: TitleBlockProps) => {
   return (
     <div className={cn("space-y-1", className)}>
       <h1

@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import { Heading } from "@/components/heading";
+import { TitleBlock } from "@/components/title-block";
 
 const DisclaimerPage = () => {
   return (
     <div className="p-4 pt-5 pb-12 md:pb-20 space-y-5">
-      <Heading
+      <TitleBlock
         title="Disclaimer"
         titleClassName="uppercase"
         subtitle="Read This to Understand Our Limitations and Responsibilities Before Using Our Services"

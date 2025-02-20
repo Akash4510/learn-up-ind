@@ -1,9 +1,9 @@
-import { Heading } from "@/components/heading";
+import { TitleBlock } from "@/components/title-block";
 
 const TermsAndConditionsPage = () => {
   return (
     <div className="p-4 pt-5 pb-12 md:pb-20 space-y-5">
-      <Heading
+      <TitleBlock
         title="Terms and Conditions"
         titleClassName="uppercase"
         subtitle="The Agreement That Explains Your Rights and Responsibilities While Using Our Services"
