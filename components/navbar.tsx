@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bell, Clapperboard, MessageCircleMore } from "lucide-react";
+import { Bell, Clapperboard, LogOut } from "lucide-react";
 
 import { UserButton } from "@/components/auth/user-button";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,7 @@ import {
 import { useAuth } from "@/hooks/use-auth";
 import { mainRoutes } from "@/constants/nav-routes";
 import { MobileSidebar } from "./sidebar";
+import { ThemeToggle } from "./theme-toggle";
 
 export const Navbar = () => {
   const { user } = useAuth();
@@ -56,34 +57,38 @@ export const Navbar = () => {
       <div className="flex items-center justify-center gap-2">
         {user ? (
           <>
-            <Button
-              variant="accent"
-              size="icon"
-              className="hidden sm:flex"
-              asChild
-            >
-              <Link href="/dashboard">
-                <MessageCircleMore className="size-6" />
-              </Link>
-            </Button>
+            {!isDashboard && (
+              <>
+                <ThemeToggle />
 
-            <Button
-              variant="accent"
-              size="icon"
-              className="hidden sm:flex"
-              asChild
-            >
-              <Link href="/dashboard">
-                <Bell className="size-6" />
-              </Link>
-            </Button>
+                <Button
+                  variant="accent"
+                  size="icon"
+                  className="hidden sm:flex"
+                  asChild
+                >
+                  <Link href="/dashboard">
+                    <Bell className="size-6" />
+                  </Link>
+                </Button>
+              </>
+            )}
 
-            <Button variant="accent" className="mr-2" asChild>
-              <Link href="/dashboard">
-                <Clapperboard className="size-5 md:mr-2" />
-                <span className="hidden sm:block">Dashboard</span>
-              </Link>
-            </Button>
+            {isDashboard ? (
+              <Button variant="accent" className="mr-2" asChild>
+                <Link href="/">
+                  <LogOut className="size-5 md:mr-1" />
+                  <span className="hidden sm:block">Exit Dashboard</span>
+                </Link>
+              </Button>
+            ) : (
+              <Button variant="accent" className="mr-2" asChild>
+                <Link href="/dashboard">
+                  <Clapperboard className="size-5 md:mr-2" />
+                  <span className="hidden sm:block">Dashboard</span>
+                </Link>
+              </Button>
+            )}
 
             <UserButton />
           </>
