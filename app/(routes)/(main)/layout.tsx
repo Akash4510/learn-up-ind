@@ -1,7 +1,7 @@
-import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
-const PagesLayout = async ({ children }: { children: React.ReactNode }) => {
+const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <header className="w-full h-16 fixed top-0 z-50 bg-background border-b">
@@ -16,4 +16,4 @@ const PagesLayout = async ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default PagesLayout;
+export default MainLayout;

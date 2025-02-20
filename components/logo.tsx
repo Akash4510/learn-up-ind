@@ -11,7 +11,7 @@ interface LogoProps {
 }
 
 export const Logo = ({ size, asLink, full, showFullInMobile }: LogoProps) => {
-  const logoSize = size || 32;
+  const logoSize = size || 30;
 
   const content = (
     <div className="flex items-center gap-2">
@@ -23,7 +23,12 @@ export const Logo = ({ size, asLink, full, showFullInMobile }: LogoProps) => {
         quality={100}
       />
       {full && (
-        <h1 className={cn("md:flex text-xl", !showFullInMobile && "hidden")}>
+        <h1
+          className={cn(
+            "md:flex text-xl font-bold mt-0.5",
+            !showFullInMobile && "hidden"
+          )}
+        >
           LearnUPIND
         </h1>
       )}

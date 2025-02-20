@@ -57,7 +57,7 @@ export const Footer = () => {
             </h3>
             <ul className="flex flex-col gap-1 text-muted-foreground">
               <Link
-                href="/explore"
+                href="/courses"
                 className="hover:underline transition-all w-fit"
               >
                 Courses
