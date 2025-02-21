@@ -12,6 +12,7 @@ export type ExtendedUser = DefaultSession["user"] & {
   // From here we can add our own fields which we want to add in
   // the session user.
   role: USER_ROLE;
+  username: string;
 };
 
 declare module "next-auth" {

@@ -4,7 +4,7 @@ import { USER_ROLE } from "@prisma/client";
 
 import authConfig from "@/auth.config";
 import { db } from "@/lib/prisma";
-import { getUserById } from "@/lib/user";
+import { addUsernameToUser, getUserById } from "@/lib/user";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -21,6 +21,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         where: { id: user.id },
         data: { emailVerified: new Date() },
       });
+      await addUsernameToUser(user.id!);
     },
   },
   callbacks: {
@@ -48,6 +49,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (token.name) session.user.name = token.name;
       if (token.picture) session.user.image = token.picture;
       if (token.role) session.user.role = token.role as USER_ROLE;
+      if (token.username) session.user.username = token.username as string;
 
       return session;
     },
@@ -64,6 +66,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       token.name = existingUser.name;
       token.email = existingUser.email;
       token.role = existingUser.role;
+      token.username = existingUser.username;
 
       return token;
     },
