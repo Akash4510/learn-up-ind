@@ -25,6 +25,9 @@ model User {
   phone         String?
   dob           DateTime?
   kyc           KYC?
+  country       String?
+  state         String?
+  gender        String?
 
   accounts Account[]
 
@@ -43,8 +46,11 @@ model KYC {
   userId String @unique @db.ObjectId
 
   aadhaarNumber     String @db.String
+  bankName          String @db.String
   bankAccountNumber String @db.String
   bankIfscCode      String @db.String
+  accountHolderName String @db.String
+  upiId             String @db.String
 
   status KYC_STATUS @default(PENDING)
 

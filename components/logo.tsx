@@ -25,7 +25,7 @@ export const Logo = ({ size, asLink, full, showFullInMobile }: LogoProps) => {
       {full && (
         <h1
           className={cn(
-            "md:flex text-xl font-bold mt-0.5",
+            "md:flex text-xl mt-0.5",
             !showFullInMobile && "hidden"
           )}
         >

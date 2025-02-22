@@ -2,6 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+:root {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+html {
+  overflow: hidden;
+}
+
+h1,
+h2 {
+  @apply font-righteous;
+}
+
+.hidden-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.bg-gradient {
+  background: var(--gradient);
+}
+
+.ql-snow .ql-stroke {
+  stroke: #f0f0f0 !important;
+}
+
+.ql-picker-label::before {
+  color: #f0f0f0 !important;
+}
+
+.ql-toolbar {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.ql-container {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+
+  font-size: 14px !important;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -62,6 +111,15 @@
 @layer base {
   * {
     @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
