@@ -11,6 +11,7 @@ import { KYCSchema } from "@/schemas/account";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -84,10 +85,15 @@ export const KYCForm = ({
                   <Input
                     {...field}
                     type="text"
+                    placeholder="eg. 1234 5678 9012"
                     disabled={!isEditMode}
                     className="disabled:opacity-100 disabled:cursor-text"
                   />
                 </FormControl>
+                <FormDescription>
+                  Make sure you are providing the correct 12 digit aadhaar
+                  number.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -103,10 +109,14 @@ export const KYCForm = ({
                   <Input
                     {...field}
                     type="text"
+                    placeholder="eg. example@upi"
                     disabled={!isEditMode}
                     className="disabled:opacity-100 disabled:cursor-text"
                   />
                 </FormControl>
+                <FormDescription>
+                  Enter your UPI ID in which you want to receive payments.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -122,10 +132,14 @@ export const KYCForm = ({
                   <Input
                     {...field}
                     type="text"
+                    placeholder="eg. ICICI Bank"
                     disabled={!isEditMode}
                     className="disabled:opacity-100 disabled:cursor-text"
                   />
                 </FormControl>
+                <FormDescription>
+                  Enter the name of the bank where you have your account.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -141,10 +155,15 @@ export const KYCForm = ({
                   <Input
                     {...field}
                     type="text"
+                    placeholder="eg. 1234567890"
                     disabled={!isEditMode}
                     className="disabled:opacity-100 disabled:cursor-text"
                   />
                 </FormControl>
+                <FormDescription>
+                  Please validate your account number before submitting. This
+                  will affect your payment.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -160,10 +179,14 @@ export const KYCForm = ({
                   <Input
                     {...field}
                     type="text"
+                    placeholder="eg. ICIC0000001"
                     disabled={!isEditMode}
                     className="disabled:opacity-100 disabled:cursor-text"
                   />
                 </FormControl>
+                <FormDescription>
+                  Enter the IFSC code of your bank branch.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -179,10 +202,14 @@ export const KYCForm = ({
                   <Input
                     {...field}
                     type="text"
+                    placeholder="eg. John Doe"
                     disabled={!isEditMode}
                     className="disabled:opacity-100 disabled:cursor-text"
                   />
                 </FormControl>
+                <FormDescription>
+                  Enter the name of the account holder as per bank records.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

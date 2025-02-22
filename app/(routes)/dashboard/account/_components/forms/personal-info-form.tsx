@@ -164,9 +164,13 @@ export const PersonalInfoForm = ({
                       {...field}
                       type="text"
                       disabled={!isEditMode}
+                      placeholder="eg. John Doe"
                       className="disabled:opacity-100 disabled:cursor-text"
                     />
                   </FormControl>
+                  <FormDescription>
+                    Please enter your full name here.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -357,10 +361,14 @@ export const PersonalInfoForm = ({
                     <Input
                       {...field}
                       type="number"
+                      placeholder="+91 xxxxx xxxxx"
                       disabled={!isEditMode}
                       className="disabled:opacity-100 disabled:cursor-text"
                     />
                   </FormControl>
+                  <FormDescription>
+                    Please enter your phone number so you can reach out to you.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
