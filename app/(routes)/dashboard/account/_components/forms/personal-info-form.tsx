@@ -451,7 +451,10 @@ export const PersonalInfoForm = ({
 
             <Button
               variant="outline"
-              onClick={onCancel}
+              onClick={() => {
+                onCancel();
+                reset();
+              }}
               disabled={isPending}
               className="min-w-32"
             >

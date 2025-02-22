@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Pencil, X } from "lucide-react";
+import { Pencil } from "lucide-react";
 import { KYC_STATUS } from "@prisma/client";
 
 import { UserWithKYC } from "@/types/user";
@@ -55,24 +55,17 @@ export const KYC = ({ user }: PersonalInfoProps) => {
           </p>
         </div>
 
-        <Button
-          onClick={() => setIsEditMode((prev) => !prev)} // Enable edit mode
-          variant="outline"
-          size="sm"
-        >
-          {/* Edit Button */}
-          {!isEditMode ? (
-            <>
-              <Pencil className="size-4" />
-              <span className="hidden md:flex">Edit</span>
-            </>
-          ) : (
-            <>
-              <X className="size-4" />
-              <span className="hidden md:flex">Cancel</span>
-            </>
-          )}
-        </Button>
+        {!isEditMode && (
+          <Button
+            onClick={() => setIsEditMode((prev) => !prev)} // Enable edit mode
+            variant="outline"
+            size="sm"
+          >
+            {/* Edit Button */}
+            <Pencil className="size-4" />
+            <span className="hidden md:flex">Edit</span>
+          </Button>
+        )}
       </div>
 
       <KYCForm

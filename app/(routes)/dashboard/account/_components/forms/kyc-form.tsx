@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useTransition } from "react";
+import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -45,7 +45,7 @@ export const KYCForm = ({
     },
   });
 
-  const { handleSubmit, control, reset } = form;
+  const { handleSubmit, control } = form;
 
   const onSubmit = async (values: KYCSchema) => {
     startTransition(() => {
@@ -67,12 +67,6 @@ export const KYCForm = ({
         });
     });
   };
-
-  useEffect(() => {
-    if (isEditMode) {
-      reset();
-    }
-  }, [isEditMode, initialData, reset]);
 
   const text = initialData ? "Update" : "Complete";
 
@@ -207,7 +201,10 @@ export const KYCForm = ({
 
             <Button
               variant="outline"
-              onClick={onCancel}
+              onClick={() => {
+                onCancel();
+                form.reset();
+              }}
               disabled={isPending}
               className="min-w-32"
             >
