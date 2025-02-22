@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import { db } from "@/lib/prisma";
 import { TitleBlock } from "@/components/title-block";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { AccountInfo } from "./_components/account-info";
 import { PersonalInfo } from "./_components/personal-info";
@@ -32,8 +33,19 @@ const AccountPage = async () => {
       <Separator className="!mt-3" />
 
       <AccountInfo user={user} />
-      <PersonalInfo user={user} />
-      <KYC user={user} />
+
+      <Tabs defaultValue="personal-info" className="max-w-[1000px] pt-2">
+        <TabsList>
+          <TabsTrigger value="personal-info">Personal Details</TabsTrigger>
+          <TabsTrigger value="kyc">KYC Details</TabsTrigger>
+        </TabsList>
+        <TabsContent value="personal-info">
+          <PersonalInfo user={user} />
+        </TabsContent>
+        <TabsContent value="kyc">
+          <KYC user={user} />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
