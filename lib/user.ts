@@ -48,7 +48,7 @@ export const addUsernameToUser = async (id: string) => {
  * @param randomLength - Length of the random string (default: 6)
  * @returns A unique username
  */
-const generateUniqueUsername = (name: string): string => {
+export const generateUniqueUsername = (name: string): string => {
   // Generate a random string
   const namePart = name
     .toLowerCase() // Convert to lowercase

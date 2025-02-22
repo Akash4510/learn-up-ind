@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { User } from "@prisma/client";
+import { useSession } from "next-auth/react";
 
 import { PersonalInfoSchema } from "@/schemas/account";
 import {
@@ -41,6 +42,8 @@ export const PersonalInfoForm = ({
   isEditMode,
   onCancel,
 }: PersonalInfoFormProps) => {
+  const { update: updateSession } = useSession();
+
   const [isPending, startTransition] = useTransition();
   const [countries, setCountries] = useState<{ code: string; name: string }[]>(
     []
@@ -91,6 +94,12 @@ export const PersonalInfoForm = ({
     // Filter out empty string values
     const cleanedValues = filterEmptyValues(values);
 
+    // Check if any modifications were made
+    if (JSON.stringify(cleanedValues) === JSON.stringify(initialData)) {
+      toast.info("No changes were made!");
+      return;
+    }
+
     startTransition(() => {
       updatePersonalInfo(cleanedValues)
         .then((data) => {
@@ -99,6 +108,9 @@ export const PersonalInfoForm = ({
           if (success) {
             toast.success(success.message);
             onCancel();
+
+            // Update the session
+            updateSession();
           }
           if (error) {
             toast.error(error.message);

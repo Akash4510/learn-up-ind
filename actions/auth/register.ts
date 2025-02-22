@@ -6,6 +6,7 @@ import { RegisterSchema } from "@/schemas/auth";
 import { db } from "@/lib/prisma";
 import { generateVerificationToken } from "@/lib/tokens";
 import { sendVerificationEmail } from "@/lib/mail";
+import { generateUniqueUsername } from "@/lib/user";
 
 export const register = async (values: RegisterSchema) => {
   const validatedFields = RegisterSchema.safeParse(values);
@@ -37,11 +38,15 @@ export const register = async (values: RegisterSchema) => {
     };
   }
 
+  const baseUsername = name?.split(" ")[0] || email?.split("@")[0];
+  const username = generateUniqueUsername(baseUsername);
+
   const newUser = await db.user.create({
     data: {
       name,
       email,
       password: hashedPassword, // Make sure to store hashed password only
+      username,
     },
   });
 
