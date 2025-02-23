@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { TitleBlock } from "@/components/title-block";
 
 const RefundPolicyPage = () => {
