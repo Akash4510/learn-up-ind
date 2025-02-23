@@ -27,7 +27,7 @@ interface ChapterDescriptionFormProps {
 }
 
 const formSchema = z.object({
-  description: z.string().optional(),
+  description: z.string(),
 });
 
 type formSchema = z.infer<typeof formSchema>;
@@ -43,7 +43,7 @@ export const ChapterDescriptionForm = ({
   const form = useForm<formSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: description || undefined,
+      description: description || "",
     },
   });
 
