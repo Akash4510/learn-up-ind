@@ -31,24 +31,69 @@ h2 {
   background: var(--gradient);
 }
 
-.ql-snow .ql-stroke {
-  stroke: #f0f0f0 !important;
+/* Add these styles to your global CSS or a CSS module */
+.ProseMirror {
+  padding: 1rem;
+  border: none;
 }
 
-.ql-picker-label::before {
-  color: #f0f0f0 !important;
+.ProseMirror:focus {
+  outline: none;
+  border-color: #3182ce;
 }
 
-.ql-toolbar {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+.ProseMirror p {
+  margin: 0;
+  line-height: 1.5;
 }
 
-.ql-container {
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
 
-  font-size: 14px !important;
+.ProseMirror h1 {
+  font-size: 2rem;
+}
+
+.ProseMirror h2 {
+  font-size: 1.75rem;
+}
+
+.ProseMirror h3 {
+  font-size: 1.5rem;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.5rem;
+}
+
+.ProseMirror ul {
+  list-style-type: disc;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+}
+
+.ProseMirror blockquote {
+  border-left: 4px solid #e2e8f0;
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+
+.ProseMirror code {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  color: #e53e3e;
 }
 
 @layer base {

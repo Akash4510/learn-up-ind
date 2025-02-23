@@ -72,8 +72,7 @@ export const ChaptersList = ({ data, onEdit, onReorder }: ChapterListProps) => {
                   <div
                     className={cn(
                       "flex items-center gap-x-2 bg-background/50 text-muted-foreground rounded-md mb-2 text-sm",
-                      chapter.isPublished &&
-                        "bg-background/80 text-primary-foreground font-medium"
+                      chapter.isPublished && "bg-background/80 font-medium"
                     )}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
@@ -96,7 +95,7 @@ export const ChaptersList = ({ data, onEdit, onReorder }: ChapterListProps) => {
                       )}
                       <Badge
                         className={cn(
-                          "bg-slate-700 hover:bg-slate-700",
+                          "bg-slate-500 hover:bg-slate-300",
                           chapter.isPublished &&
                             "bg-primary/50 hover:bg-primary/50"
                         )}

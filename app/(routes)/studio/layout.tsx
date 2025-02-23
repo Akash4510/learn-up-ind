@@ -15,7 +15,7 @@ const StudioLayout = async ({ children }: { children: React.ReactNode }) => {
         </div>
 
         <div className="flex-1 flex flex-col overflow-y-auto">
-          <main className="flex-1 p-4">{children}</main>
+          <main className="flex-1 p-4 pb-10">{children}</main>
           <Footer />
         </div>
       </div>
