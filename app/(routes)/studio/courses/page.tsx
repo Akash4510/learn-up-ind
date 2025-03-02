@@ -1,13 +1,27 @@
 import React from "react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Plus } from "lucide-react";
 
 import { TitleBlock } from "@/components/title-block";
 import { Button } from "@/components/ui/button";
+import { auth } from "@/auth";
+import { CourseCard } from "@/components/course-card";
+import { getCourses } from "@/actions/course/get-courses";
 
-const CoursesPage = () => {
+const CoursesPage = async () => {
+  const session = await auth();
+
+  if (!session || !session?.user) {
+    redirect("/");
+  }
+
+  const courses = await getCourses({
+    creatorId: session.user.id,
+  });
+
   return (
-    <div>
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
         <TitleBlock
           title="Courses"
@@ -22,6 +36,12 @@ const CoursesPage = () => {
             </Link>
           </Button>
         </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+        {courses.map((course) => (
+          <CourseCard key={course.id} course={course} isCreator />
+        ))}
       </div>
     </div>
   );

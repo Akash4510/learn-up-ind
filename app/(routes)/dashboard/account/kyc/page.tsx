@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import { auth } from "@/auth";
 import { db } from "@/lib/prisma";
+import { TitleBlock } from "@/components/title-block";
 
 import { AccountInfo } from "../_components/account-info";
 import { KYC } from "../_components/kyc";
@@ -27,6 +28,12 @@ const AccountKYCPage = async () => {
 
   return (
     <div className="space-y-6">
+      <TitleBlock
+        title="KYC"
+        subtitle="View and edit your kyc details here"
+        withSeparator
+      />
+
       <AccountInfo user={user} />
 
       <div className="max-w-[1000px] space-y-4">

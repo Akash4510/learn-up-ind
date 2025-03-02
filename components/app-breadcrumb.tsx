@@ -19,7 +19,11 @@ const toTitleCase = (str: string) => {
     .replace(/\w\S*/g, (word) => word.charAt(0).toUpperCase() + word.slice(1)); // Capitalize each word
 };
 
-export const AppBreadcrumb = () => {
+interface AppBreadcrumbProps {
+  showHome?: boolean;
+}
+
+export const AppBreadcrumb = ({ showHome }: AppBreadcrumbProps) => {
   const pathname = usePathname();
 
   // Split the pathname into segments
@@ -40,9 +44,23 @@ export const AppBreadcrumb = () => {
   return (
     <Breadcrumb>
       <BreadcrumbList>
+        {showHome && (
+          <BreadcrumbItem>
+            {pathname === "/" ? (
+              // Active page (no link, white text)
+              <span className="text-white">Home</span>
+            ) : (
+              // Non-active page (link)
+              <BreadcrumbLink asChild>
+                <Link href="/">Home</Link>
+              </BreadcrumbLink>
+            )}
+          </BreadcrumbItem>
+        )}
+
         {breadcrumbItems.map((item, index) => (
           <React.Fragment key={item.href}>
-            {!!index && <BreadcrumbSeparator />}
+            {(!!index || showHome) && <BreadcrumbSeparator />}
             <BreadcrumbItem>
               {item.isActive ? (
                 // Active page (no link, white text)
