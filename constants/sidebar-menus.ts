@@ -7,12 +7,12 @@ import {
   Trophy,
   Zap,
   MessageCircle,
-  Settings,
   BookOpen,
   Bookmark,
   IndianRupee,
   Sparkles,
   Dumbbell,
+  IdCard,
 } from "lucide-react";
 
 type Menu = {
@@ -118,11 +118,11 @@ export const dashboardMenus: MenuGroup[] = [
       {
         label: "KYC Details",
         url: "/dashboard/account/kyc",
-        icon: Settings,
+        icon: IdCard,
       },
       {
         label: "Upgrade",
-        url: "/dashboard/upgrade",
+        url: "/dashboard/account",
         icon: Sparkles,
       },
     ],
