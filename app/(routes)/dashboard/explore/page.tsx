@@ -1,19 +1,16 @@
-import { getCourses } from "@/actions/course/get-courses";
-import { CourseCard } from "@/components/course-card";
 import { TitleBlock } from "@/components/title-block";
+import { CourseCard } from "@/components/course-card";
+import { getCourses } from "@/actions/course/get-courses";
 
-const CoursesPage = async () => {
+const ExplorePage = async () => {
   const courses = await getCourses({
     isPublished: true,
+    includePurchased: false,
   });
 
   return (
     <div className="space-y-6">
-      <TitleBlock
-        title="Courses"
-        subtitle="Explore all the courses"
-        withSeparator
-      />
+      <TitleBlock title="Explore Courses" subtitle="Explore all the courses" />
 
       {courses.length ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
@@ -30,4 +27,4 @@ const CoursesPage = async () => {
   );
 };
 
-export default CoursesPage;
+export default ExplorePage;

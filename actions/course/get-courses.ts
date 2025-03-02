@@ -11,16 +11,32 @@ export const getCourses = async (
     isPublished,
     categoryId,
     creatorId,
-    includePurchased = false,
+    onlyPurchased = false,
     includeProgress = false,
+    includePurchased = true,
   } = options;
 
   // Base query to fetch courses
   const courses = await db.course.findMany({
     where: {
-      isPublished: isPublished !== undefined ? isPublished : undefined,
-      categoryId: categoryId || undefined,
-      creatorId: creatorId || undefined,
+      isPublished,
+      categoryId,
+      creatorId,
+      // Add a condition to filter courses based on purchases or creator
+      OR: onlyPurchased
+        ? [
+            {
+              purchases: {
+                some: {
+                  userId, // Only include courses purchased by the user
+                },
+              },
+            },
+            {
+              creatorId: userId, // Include courses created by the user
+            },
+          ]
+        : undefined,
     },
     include: {
       category: true,
@@ -36,7 +52,7 @@ export const getCourses = async (
       purchases: includePurchased
         ? {
             where: {
-              userId: userId || undefined,
+              userId,
             },
           }
         : false,

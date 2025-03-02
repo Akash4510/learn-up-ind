@@ -4,7 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Edit, ShoppingCart, PlayCircle, IndianRupee } from "lucide-react";
+import {
+  Edit,
+  ShoppingCart,
+  PlayCircle,
+  IndianRupee,
+  BookOpen,
+} from "lucide-react";
 import { CourseWithProgress } from "@/types/course";
 import { Progress } from "@/components/ui/progress";
 
@@ -31,7 +37,7 @@ export const CourseCard = ({
   } = course;
 
   return (
-    <div className="group border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div className="group border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
       {/* Thumbnail */}
       <div className="relative aspect-video">
         {thumbnail ? (
@@ -51,22 +57,21 @@ export const CourseCard = ({
             </Badge>
           )}
 
-          {isPurchased && (
-            <span className="text-sm text-muted-foreground">
-              {chapters.length} chapters
-            </span>
-          )}
+          <span className="text-sm text-muted-foreground">
+            <BookOpen className="size-3 inline-flex mr-2" />
+            {chapters.length} chapters
+          </span>
         </div>
       </div>
 
       {/* Course Details */}
-      <div className="p-4">
+      <div className="p-4 flex flex-col flex-grow">
         {/* Title */}
         <h3 className="text-lg font-semibold line-clamp-2">{title}</h3>
 
         {/* Description */}
         {description && (
-          <p className="text-sm text-muted-foreground mt-0.5 line-clamp-3">
+          <p className="text-sm text-muted-foreground mt-0.5 line-clamp-3 flex-grow">
             {description}
           </p>
         )}
@@ -84,12 +89,16 @@ export const CourseCard = ({
         {/* Price and Status */}
         <div className="flex items-center justify-between mt-4">
           <div className="flex items-center gap-2">
-            {!isPurchased && price !== null && (
-              <span className="text-lg font-semibold flex items-center">
-                <IndianRupee className="size-5" />
-                {price.toFixed(2)}
-              </span>
-            )}
+            {!isPurchased &&
+              price !== null &&
+              (price === 0 ? (
+                <span className="font-semibold flex items-center">Free</span>
+              ) : (
+                <span className="text-lg font-semibold flex items-center">
+                  <IndianRupee className="size-5" />
+                  {price.toFixed(2)}
+                </span>
+              ))}
             {isCreator && !isPublished && (
               <Badge variant="secondary" className="text-xs">
                 Draft

@@ -29,8 +29,9 @@ model User {
   state         String?
   gender        String?
 
-  accounts Account[]
-  courses  Course[]
+  accounts  Account[]
+  courses   Course[]
+  affiliate Affiliate?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -155,13 +156,40 @@ model CoursePurchase {
   razorpayOrderId   String @unique @db.String
   razorpayPaymentId String @unique @db.String
 
+  referralId String? @db.ObjectId
+
+  course   Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  referral Referral?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
-
   @@unique([userId, courseId])
-  @@index([courseId])
+}
+
+model Affiliate {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String   @unique @db.ObjectId
+  affiliateCode String   @unique @db.String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  referrals Referral[] // Add referral relationship
+}
+
+model Referral {
+  id               String @id @default(auto()) @map("_id") @db.ObjectId
+  affiliateId      String @db.ObjectId
+  referredUserId   String @db.ObjectId
+  purchaseId       String @unique @db.ObjectId
+  commissionEarned Float
+
+  affiliate Affiliate      @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
+  purchase  CoursePurchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Account {

@@ -38,11 +38,17 @@ const CoursesPage = async () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
-        {courses.map((course) => (
-          <CourseCard key={course.id} course={course} isCreator />
-        ))}
-      </div>
+      {courses.length ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+          {courses.map((course) => (
+            <CourseCard key={course.id} course={course} isCreator />
+          ))}
+        </div>
+      ) : (
+        <div className="py-4">
+          <p className="text-lg">You have not created any course yet!</p>
+        </div>
+      )}
     </div>
   );
 };

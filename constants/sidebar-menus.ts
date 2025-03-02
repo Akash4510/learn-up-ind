@@ -130,7 +130,7 @@ export const dashboardMenus: MenuGroup[] = [
       },
       {
         label: "Upgrade",
-        url: "/dashboard/account",
+        url: "/dashboard/explore",
         icon: Sparkles,
       },
     ],
