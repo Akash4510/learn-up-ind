@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
+import Script from "next/script";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 
@@ -48,6 +49,12 @@ export default async function RootLayout({
             <Toaster richColors />
             {children}
           </ThemeProvider>
+
+          {/* Razorpay script tag, to allow payments */}
+          <Script
+            type="text/javascript"
+            src="https://checkout.razorpay.com/v1/checkout.js"
+          />
         </body>
       </html>
     </SessionProvider>

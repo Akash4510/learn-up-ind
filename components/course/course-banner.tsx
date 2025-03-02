@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, PlayCircle } from "lucide-react";
 
 import { CourseWithChapterAndProgress } from "@/types/course";
-import CourseEnrollButton from "./course-enroll-button";
+import { CourseEnrollButton } from "./course-enroll-button";
 
 interface CourseBannerProps {
   course: CourseWithChapterAndProgress;
@@ -58,7 +58,7 @@ export const CourseBanner = ({ course }: CourseBannerProps) => {
                 : `₹ ${course.price}`}
             </div>
 
-            <CourseEnrollButton />
+            <CourseEnrollButton course={course} />
           </div>
         </div>
       </div>

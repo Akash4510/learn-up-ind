@@ -1,7 +1,122 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
+import { useTransition } from "react";
+import { redirect, useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { CircleCheck, Loader2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import { createOrder } from "@/actions/course/checkout";
+import { useConfettiStore } from "@/hooks/use-confetti-store";
+import { CourseWithProgress } from "@/types/course";
+import { useAuth } from "@/hooks/use-auth";
+import Link from "next/link";
 
-const CourseEnrollButton = () => {
-  return <Button className="w-full">Enroll Now</Button>;
+interface CourseEnrollButtonProps {
+  course: CourseWithProgress;
+}
+
+export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
+  const { id: courseId } = course;
+  const price = course.price || 0;
+
+  const session = useAuth();
+  if (!session || !session.user) {
+    redirect("/auth/login");
+  }
+
+  const isPurchased = course.purchases.some(
+    (purchase) => purchase.userId === session.user?.id
+  );
+
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const confetti = useConfettiStore();
+
+  const onClick = async () => {
+    startTransition(() => {
+      createOrder({ courseId })
+        .then((data) => {
+          const { error, success } = data;
+
+          if (error) {
+            toast.error(error.message);
+          }
+          if (success) {
+            const { order, metadata } = success;
+
+            const paymentData = {
+              key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+              amount: price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+              currency: "INR",
+              name: "LearnUPIND", // The company name
+              description: "Course Enrollment", // A description of the product
+              image: "/logo.png", // Company logo
+              order_id: order.id,
+              handler: async function (response: any) {
+                try {
+                  // Verify the payment
+                  const verifyRes = await fetch(
+                    `/api/course/${courseId}/verify-order`,
+                    {
+                      method: "POST",
+                      body: JSON.stringify({
+                        orderId: order.id,
+                        razorpayPaymentId: response.razorpay_payment_id,
+                        razorpaySignature: response.razorpay_signature,
+                        userId: metadata.userId,
+                      }),
+                    }
+                  );
+
+                  const verifyData = await verifyRes.json();
+
+                  console.log(verifyData);
+
+                  if (verifyData.error) {
+                    toast.error(verifyData.error.message);
+                  } else {
+                    toast.success("Payment successful");
+                    confetti.onOpen();
+                    router.refresh();
+                  }
+                } catch (error) {
+                  console.log({ paymentHandlerError: error });
+                  toast.error("Something went wrong!");
+                }
+              },
+            };
+
+            const rzp = new (window as any).Razorpay(paymentData);
+            rzp.open();
+          }
+        })
+        .catch(() => {
+          toast.error("Something went wrong!");
+        });
+    });
+  };
+
+  if (isPurchased) {
+    return (
+      <Button
+        size="sm"
+        className="w-full bg-emerald-500 hover:bg-emerald-600 text-primary"
+        disabled={isPending}
+        asChild
+      >
+        <Link href={`/courses/${course.id}`}>
+          <CircleCheck className="size-4" />
+          Go to course
+        </Link>
+      </Button>
+    );
+  }
+
+  return (
+    <Button size="sm" className="w-full" disabled={isPending} onClick={onClick}>
+      {isPending ? <Loader2 className="size-4 animate-spin" /> : `Enroll`}
+    </Button>
+  );
 };
-
-export default CourseEnrollButton;
