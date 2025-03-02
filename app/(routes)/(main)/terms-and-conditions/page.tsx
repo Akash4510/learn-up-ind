@@ -5,9 +5,8 @@ const TermsAndConditionsPage = () => {
     <div className="p-4 pt-5 pb-12 md:pb-20 space-y-5">
       <TitleBlock
         title="Terms and Conditions"
-        titleClassName="uppercase"
         subtitle="The Agreement That Explains Your Rights and Responsibilities While Using Our Services"
-        subtitleClassName="text-base"
+        className="uppercase"
       />
 
       <div className="space-y-7 leading-7">

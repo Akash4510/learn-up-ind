@@ -1,33 +1,84 @@
-import { cn } from "@/lib/utils";
+"use client";
 
-interface TitleBlockProps {
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import { Separator } from "./ui/separator";
+
+// Define variants using cva
+const titleBlockVariants = cva("space-y-1", {
+  variants: {
+    size: {
+      sm: "space-y-0.5",
+      md: "space-y-1",
+      lg: "space-y-2",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+const titleVariants = cva("font-bold tracking-wider", {
+  variants: {
+    size: {
+      sm: "text-xl",
+      md: "text-[1.75rem] md:text-3xl",
+      lg: "text-4xl md:text-5xl",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+const subtitleVariants = cva("text-sm text-muted-foreground", {
+  variants: {
+    size: {
+      sm: "text-xs",
+      md: "text-sm",
+      lg: "text-base",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
+
+interface TitleBlockProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof titleBlockVariants>,
+    VariantProps<typeof titleVariants>,
+    VariantProps<typeof subtitleVariants> {
   title: string;
   subtitle?: string;
-  className?: string;
-  titleClassName?: string;
-  subtitleClassName?: string;
+  withSeparator?: boolean;
 }
 
 export const TitleBlock = ({
   title,
   subtitle,
+  size,
+  withSeparator,
   className,
-  titleClassName,
-  subtitleClassName,
+  ...props
 }: TitleBlockProps) => {
   return (
-    <div className={cn("space-y-1", className)}>
-      <h1
-        className={cn(
-          "text-[1.75rem] md:text-3xl font-bold tracking-wider",
-          titleClassName
-        )}
-      >
-        {title}
-      </h1>
-      <h3 className={cn("text-sm text-muted-foreground", subtitleClassName)}>
-        {subtitle}
-      </h3>
+    <div
+      className={cn(titleBlockVariants({ size, className }))}
+      {...props}
+      aria-label={title}
+    >
+      <h1 className={cn(titleVariants({ size }))}>{title}</h1>
+      {subtitle && (
+        <h2
+          className={cn(subtitleVariants({ size }))}
+          aria-describedby="subtitle"
+        >
+          {subtitle}
+        </h2>
+      )}
+
+      {withSeparator && <Separator className="!mt-3" />}
     </div>
   );
 };

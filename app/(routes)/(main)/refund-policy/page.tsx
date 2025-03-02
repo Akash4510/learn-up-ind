@@ -7,9 +7,8 @@ const RefundPolicyPage = () => {
     <div className="p-4 pt-5 pb-12 md:pb-20 space-y-5">
       <TitleBlock
         title="Refund Policy"
-        titleClassName="uppercase"
         subtitle="Clear Guidelines on When and How You Can Request a Refund"
-        subtitleClassName="text-base"
+        className="uppercase"
       />
 
       <div className="space-y-7 leading-7">

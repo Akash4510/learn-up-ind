@@ -7,9 +7,8 @@ const DisclaimerPage = () => {
     <div className="p-4 pt-5 pb-12 md:pb-20 space-y-5">
       <TitleBlock
         title="Disclaimer"
-        titleClassName="uppercase"
         subtitle="Read This to Understand Our Limitations and Responsibilities Before Using Our Services"
-        subtitleClassName="text-base"
+        className="uppercase"
       />
 
       <div className="space-y-3 leading-7">

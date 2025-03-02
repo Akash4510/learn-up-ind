@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { db } from "@/lib/prisma";
 import { TitleBlock } from "@/components/title-block";
-import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { AccountInfo } from "./_components/account-info";
@@ -29,8 +28,11 @@ const AccountPage = async () => {
 
   return (
     <div className="space-y-6">
-      <TitleBlock title="Profile" subtitle="View and edit your profile here" />
-      <Separator className="!mt-3" />
+      <TitleBlock
+        title="Profile"
+        subtitle="View and edit your profile here"
+        withSeparator
+      />
 
       <AccountInfo user={user} />
 
