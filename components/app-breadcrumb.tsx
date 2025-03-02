@@ -12,6 +12,13 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
+// Helper function to convert a string to title case
+const toTitleCase = (str: string) => {
+  return str
+    .replace(/-/g, " ") // Replace hyphens with spaces
+    .replace(/\w\S*/g, (word) => word.charAt(0).toUpperCase() + word.slice(1)); // Capitalize each word
+};
+
 export const AppBreadcrumb = () => {
   const pathname = usePathname();
 
@@ -21,7 +28,7 @@ export const AppBreadcrumb = () => {
   // Map route segments to breadcrumb labels
   const breadcrumbItems = pathSegments.map((segment, index) => {
     const href = `/${pathSegments.slice(0, index + 1).join("/")}`;
-    const label = segment.charAt(0).toUpperCase() + segment.slice(1); // Capitalize the first letter
+    const label = toTitleCase(segment); // Convert to title case
 
     return {
       label,
