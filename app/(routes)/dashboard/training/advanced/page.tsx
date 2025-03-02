@@ -1,5 +1,3 @@
-import React from "react";
-
 import { TitleBlock } from "@/components/title-block";
 import { VideoPlayer } from "@/components/video-player";
 
