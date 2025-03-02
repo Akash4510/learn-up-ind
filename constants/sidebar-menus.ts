@@ -1,6 +1,5 @@
 import {
   BarChart3,
-  Image,
   LucideIcon,
   User,
   Users,
@@ -13,6 +12,15 @@ import {
   Sparkles,
   Dumbbell,
   IdCard,
+  CreditCard,
+  Settings,
+  Star,
+  Folder,
+  FileText,
+  Video,
+  LayoutDashboard,
+  ClipboardCheck,
+  ShieldCheck,
 } from "lucide-react";
 
 type Menu = {
@@ -131,27 +139,112 @@ export const dashboardMenus: MenuGroup[] = [
 
 export const studioMenus: MenuGroup[] = [
   {
-    groupLabel: "Studio",
+    groupLabel: "Analytics",
     menus: [
       {
-        label: "Analytics",
-        url: "/studio",
+        label: "Overview",
+        url: "/studio/analytics",
         icon: BarChart3,
       },
       {
-        label: "Manage Media",
-        url: "/studio/media",
-        icon: Image,
+        label: "User Insights",
+        url: "/studio/analytics/user-insights",
+        icon: Users,
       },
       {
-        label: "Manage Courses",
+        label: "Course Performance",
+        url: "/studio/analytics/course-performance",
+        icon: BookOpen,
+      },
+    ],
+  },
+  {
+    groupLabel: "User Management",
+    menus: [
+      {
+        label: "All Users",
+        url: "/studio/users",
+        icon: Users,
+      },
+      {
+        label: "Roles & Permissions",
+        url: "/studio/users/roles",
+        icon: ShieldCheck,
+      },
+      {
+        label: "Activity Logs",
+        url: "/studio/users/activity-logs",
+        icon: ClipboardCheck,
+      },
+    ],
+  },
+  {
+    groupLabel: "Media Management",
+    menus: [
+      {
+        label: "Home Page Media",
+        url: "/studio/media/home",
+        icon: LayoutDashboard,
+      },
+      {
+        label: "Live Offers Media",
+        url: "/studio/media/live-offers",
+        icon: Zap,
+      },
+      {
+        label: "Course Media",
+        url: "/studio/media/courses",
+        icon: Video,
+      },
+      {
+        label: "File Library",
+        url: "/studio/media/library",
+        icon: Folder,
+      },
+    ],
+  },
+  {
+    groupLabel: "Course Management",
+    menus: [
+      {
+        label: "Courses",
         url: "/studio/courses",
         icon: BookOpen,
       },
       {
-        label: "Manage User Roles",
-        url: "/studio/user-roles",
-        icon: Users,
+        label: "Create Course",
+        url: "/studio/courses/new",
+        icon: FileText,
+      },
+      {
+        label: "Categories",
+        url: "/studio/courses/categories",
+        icon: Folder,
+      },
+      {
+        label: "Reviews & Ratings",
+        url: "/studio/courses/reviews",
+        icon: Star,
+      },
+    ],
+  },
+  {
+    groupLabel: "Payout Management",
+    menus: [
+      {
+        label: "Payout Requests",
+        url: "/studio/payouts",
+        icon: CreditCard,
+      },
+      {
+        label: "Transaction History",
+        url: "/studio/payouts/history",
+        icon: IndianRupee,
+      },
+      {
+        label: "Payout Settings",
+        url: "/studio/payouts/settings",
+        icon: Settings,
       },
     ],
   },
