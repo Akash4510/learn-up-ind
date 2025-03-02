@@ -1,25 +1,29 @@
+import { AppSidebar } from "@/components/app-sidebar";
+import { Separator } from "@/components/ui/separator";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
-import { Sidebar } from "@/components/sidebar";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
-    <>
-      <header className="w-full h-16 fixed top-0 z-50 bg-background border-b">
-        <Navbar />
-      </header>
+    <SidebarProvider>
+      <AppSidebar />
 
-      <div className="pt-16 flex flex-row flex-1 h-screen">
-        <div className="hidden md:flex">
-          <Sidebar />
-        </div>
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 border-b px-4">
+          <SidebarTrigger className="-ml-1" />
+          <Separator orientation="vertical" className="mr-2 h-4" />
+        </header>
 
-        <div className="flex-1 flex flex-col overflow-y-auto">
-          <main className="flex-1 p-4 pb-10">{children}</main>
+        <div className="flex flex-1 flex-col gap-4">
+          <main className="p-4 pb-10">{children}</main>
           <Footer />
         </div>
-      </div>
-    </>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };
 
