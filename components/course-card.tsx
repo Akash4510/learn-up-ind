@@ -51,9 +51,11 @@ export const CourseCard = ({
             </Badge>
           )}
 
-          <span className="text-sm text-muted-foreground">
-            {chapters.length} chapters
-          </span>
+          {isPurchased && (
+            <span className="text-sm text-muted-foreground">
+              {chapters.length} chapters
+            </span>
+          )}
         </div>
       </div>
 
