@@ -25,23 +25,11 @@ export type CourseWithChapterAndProgress = Course & {
   progress?: number;
 };
 
-type BaseGetCoursesOptions = {
+export type GetCoursesOptions = {
+  userId?: string;
   isPublished?: boolean;
   categoryId?: string;
   creatorId?: string;
   includePurchased?: boolean;
   includeProgress?: boolean;
 };
-
-type OnlyPurchasedOptions = {
-  onlyPurchased: true;
-  userId: string; // userId is mandatory when onlyPurchased is true
-};
-
-type NonOnlyPurchasedOptions = {
-  onlyPurchased?: false | undefined;
-  userId?: string; // userId is optional when onlyPurchased is false or undefined
-};
-
-export type GetCoursesOptions = BaseGetCoursesOptions &
-  (OnlyPurchasedOptions | NonOnlyPurchasedOptions);

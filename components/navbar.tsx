@@ -66,7 +66,7 @@ export const Navbar = () => {
               </Link>
             </Button>
 
-            <Button variant="accent" className="mr-2" asChild>
+            <Button variant="accent" asChild>
               <Link href="/dashboard">
                 <Clapperboard className="size-5 md:mr-2" />
                 <span className="hidden sm:block">Dashboard</span>

@@ -18,7 +18,6 @@ const MyCourses = async () => {
 
   const courses = await getCourses({
     isPublished: true,
-    onlyPurchased: true,
     userId: session.user.id,
   });
 

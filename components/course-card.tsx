@@ -39,9 +39,14 @@ export const CourseCard = ({
   return (
     <div className="group border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
       {/* Thumbnail */}
-      <div className="relative aspect-video">
+      <div className="relative aspect-video overflow-hidden">
         {thumbnail ? (
-          <Image src={thumbnail} alt={title} fill className="object-cover" />
+          <Image
+            src={thumbnail}
+            alt={title}
+            fill
+            className="object-cover group-hover:scale-105 transition-all"
+          />
         ) : (
           <div className="flex items-center justify-center bg-muted h-full">
             <PlayCircle className="h-10 w-10 text-muted-foreground" />
@@ -71,7 +76,7 @@ export const CourseCard = ({
 
         {/* Description */}
         {description && (
-          <p className="text-sm text-muted-foreground mt-0.5 line-clamp-3 flex-grow">
+          <p className="text-sm text-muted-foreground text-pretty mt-0.5 line-clamp-3 flex-grow">
             {description}
           </p>
         )}

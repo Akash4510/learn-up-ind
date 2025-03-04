@@ -11,7 +11,6 @@ export const getCourses = async (
     isPublished,
     categoryId,
     creatorId,
-    onlyPurchased = false,
     includeProgress = false,
     includePurchased = true,
   } = options;
@@ -23,7 +22,7 @@ export const getCourses = async (
       categoryId,
       creatorId,
       // Add a condition to filter courses based on purchases or creator
-      OR: onlyPurchased
+      OR: userId
         ? [
             {
               purchases: {
@@ -60,7 +59,7 @@ export const getCourses = async (
         select: {
           id: true,
           name: true,
-          image: true, // Include creator's profile image
+          image: true,
         },
       },
     },

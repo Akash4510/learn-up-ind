@@ -11,7 +11,7 @@ interface CourseBannerProps {
 
 export const CourseBanner = ({ course }: CourseBannerProps) => {
   return (
-    <div className="relative h-[60vh] w-full">
+    <div className="relative min-h-[60vh] w-full">
       {course.thumbnail ? (
         <Image
           src={course.thumbnail}
@@ -47,8 +47,6 @@ export const CourseBanner = ({ course }: CourseBannerProps) => {
             <h1 className="text-4xl md:text-5xl font-bold mb-2">
               {course.title}
             </h1>
-
-            <p className="text-lg max-w-2xl">{course.description}</p>
           </div>
 
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-5 md:min-w-[300px]">

@@ -5,7 +5,6 @@ import { getCourses } from "@/actions/course/get-courses";
 const ExplorePage = async () => {
   const courses = await getCourses({
     isPublished: true,
-    includePurchased: false,
   });
 
   return (
