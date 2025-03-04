@@ -2,6 +2,7 @@
 "use client";
 
 import { useTransition } from "react";
+import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { CircleCheck, Loader2 } from "lucide-react";
@@ -11,7 +12,7 @@ import { createOrder } from "@/actions/course/checkout";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
 import { CourseWithProgress } from "@/types/course";
 import { useAuth } from "@/hooks/use-auth";
-import Link from "next/link";
+import { createAffiliate } from "@/actions/affiliate";
 
 interface CourseEnrollButtonProps {
   course: CourseWithProgress;
@@ -51,7 +52,7 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
               amount: price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
               currency: "INR",
               name: "LearnUPIND", // The company name
-              description: "Course Enrollment", // A description of the product
+              description: `${course.title} - ${course.description}`, // A description of the product
               image: "/logo.png", // Company logo
               order_id: order.id,
               handler: async function (response: any) {
@@ -79,6 +80,20 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
                   } else {
                     toast.success("Payment successful");
                     confetti.onOpen();
+
+                    // Create the affilate if the user is not already there
+                    createAffiliate(metadata.userId).then((data) => {
+                      const { success, error } = data;
+
+                      if (error) {
+                        toast.error(error.message);
+                      }
+                      if (success) {
+                        toast.success(success.message);
+                      }
+                    });
+
+                    // Refresh the page
                     router.refresh();
                   }
                 } catch (error) {

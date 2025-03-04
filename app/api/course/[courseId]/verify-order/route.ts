@@ -41,7 +41,7 @@ export async function POST(
   }
 
   // DB logic to update the course purchase
-  await db.coursePurchase.create({
+  const purchase = await db.coursePurchase.create({
     data: {
       userId,
       courseId,
@@ -54,6 +54,7 @@ export async function POST(
     {
       success: {
         message: "Payment successful",
+        purchase,
       },
     },
     { status: 200 }

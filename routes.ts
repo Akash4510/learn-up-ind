@@ -4,13 +4,13 @@
  */
 export const publicRoutes = [
   "/",
-  "/about",
-  "/explore",
   "/courses",
-  "/privacy-policy",
+  "/contact",
+  "/about",
   "/terms-and-conditions",
-  "/refund-policy",
+  "/privacy-policy",
   "/disclaimer",
+  "/refund-policy",
   "/shipping-policy",
   "/api/uploadthing/*",
   "/api/webhook",

@@ -1,3 +1,5 @@
+import { NextResponse } from "next/server";
+
 import { auth } from "@/auth";
 import {
   DEFAULT_LOGIN_REDIRECT,
@@ -29,20 +31,23 @@ export default auth((req) => {
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isPublicRoute = isRoutePublic(nextUrl.pathname);
 
+  // Handle referral code
+  const referralCode = nextUrl.searchParams.get("ref");
+
+  // Create a response object to modify cookies
+  let response: Response | NextResponse;
+
   if (isApiAuthRoute) {
-    return;
-  }
-
-  if (isAuthRoute) {
+    response = NextResponse.next();
+  } else if (isAuthRoute) {
     if (isLoggedin) {
-      // Adding nextUrl as the second parameter will make the path absolute
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+      response = NextResponse.redirect(
+        new URL(DEFAULT_LOGIN_REDIRECT, nextUrl)
+      );
+    } else {
+      response = NextResponse.next();
     }
-
-    return;
-  }
-
-  if (!isLoggedin && !isPublicRoute) {
+  } else if (!isLoggedin && !isPublicRoute) {
     let callbackUrl = nextUrl.pathname;
 
     if (nextUrl.search) {
@@ -51,12 +56,25 @@ export default auth((req) => {
 
     const encodedCallbackUrl = encodeURIComponent(callbackUrl);
 
-    return Response.redirect(
+    response = NextResponse.redirect(
       new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl)
     );
+  } else {
+    response = NextResponse.next();
   }
 
-  return;
+  // Add the referral code to the response cookie (if it exists)
+  if (referralCode) {
+    if (response instanceof NextResponse) {
+      console.log(`referralCode - ${referralCode} is added in the cookies`);
+      response.cookies.set("referralCode", referralCode, {
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+        path: "/", // Available across the entire site
+      });
+    }
+  }
+
+  return response;
 });
 
 export const config = {

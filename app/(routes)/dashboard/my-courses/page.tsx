@@ -1,13 +1,12 @@
-import React from "react";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+import { BookOpen } from "lucide-react";
 
 import { auth } from "@/auth";
 import { getCourses } from "@/actions/course/get-courses";
 import { TitleBlock } from "@/components/title-block";
 import { CourseCard } from "@/components/course-card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { BookOpen } from "lucide-react";
 
 const MyCourses = async () => {
   const session = await auth();
