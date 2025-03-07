@@ -153,10 +153,9 @@ model CoursePurchase {
   userId   String @db.ObjectId
   courseId String @db.ObjectId
 
+  amount            Float
   razorpayOrderId   String @unique @db.String
   razorpayPaymentId String @unique @db.String
-
-  referralId String? @db.ObjectId
 
   course   Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
   referral Referral?
@@ -168,14 +167,19 @@ model CoursePurchase {
 }
 
 model Affiliate {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId       String   @unique @db.ObjectId
-  referralCode String   @unique @db.String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String @unique @db.ObjectId
+  referralCode  String @unique @db.String
+  totalEarnings Float  @default(0)
+  pendingPayout Float  @default(0)
 
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  referrals Referral[] // Add referral relationship
+  referrals Referral[]
+  payouts   Payout[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Referral {
@@ -183,10 +187,36 @@ model Referral {
   affiliateId      String @db.ObjectId
   referredUserId   String @db.ObjectId
   purchaseId       String @unique @db.ObjectId
+  amount           Float
   commissionEarned Float
 
   affiliate Affiliate      @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
   purchase  CoursePurchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  payout    Payout?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+}
+
+enum PAYOUT_STATUS {
+  PENDING
+  COMPLETED
+}
+
+model Payout {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  affiliateId String        @db.ObjectId
+  referralId  String        @unique @db.ObjectId
+  amount      Float
+  status      PAYOUT_STATUS @default(PENDING)
+
+  payoutDate    DateTime?
+  transactionId String?
+
+  affiliate Affiliate @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
+  referral  Referral  @relation(fields: [referralId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

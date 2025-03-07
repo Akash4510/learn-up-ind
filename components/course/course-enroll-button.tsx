@@ -52,7 +52,7 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
               amount: price * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
               currency: "INR",
               name: "LearnUPIND", // The company name
-              description: `${course.title} - ${course.description}`, // A description of the product
+              description: "Course Enrollment", // !Should not exceed 255 Characters
               image: "/logo.png", // Company logo
               order_id: order.id,
               handler: async function (response: any) {
@@ -64,15 +64,15 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
                       method: "POST",
                       body: JSON.stringify({
                         orderId: order.id,
+                        userId: metadata.userId,
+                        amount: price,
                         razorpayPaymentId: response.razorpay_payment_id,
                         razorpaySignature: response.razorpay_signature,
-                        userId: metadata.userId,
                       }),
                     }
                   );
 
                   const verifyData = await verifyRes.json();
-
                   console.log(verifyData);
 
                   if (verifyData.error) {
@@ -81,10 +81,10 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
                     toast.success("Payment successful");
                     confetti.onOpen();
 
-                    // Create the affilate if the user is not already there
+                    // Create the affilate if the user is not already an affiliate
+                    // When purchasing the first course.
                     createAffiliate(metadata.userId).then((data) => {
                       const { success, error } = data;
-
                       if (error) {
                         toast.error(error.message);
                       }
