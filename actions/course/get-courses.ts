@@ -11,8 +11,9 @@ export const getCourses = async (
     isPublished,
     categoryId,
     creatorId,
+    includeSelfCreated = false,
     includeProgress = false,
-    includePurchased = true,
+    includePurchasesData = true,
   } = options;
 
   // Base query to fetch courses
@@ -23,18 +24,28 @@ export const getCourses = async (
       creatorId,
       // Add a condition to filter courses based on purchases or creator
       OR: userId
-        ? [
-            {
-              purchases: {
-                some: {
-                  userId, // Only include courses purchased by the user
+        ? includeSelfCreated
+          ? [
+              {
+                purchases: {
+                  some: {
+                    userId, // Only include courses purchased by the user
+                  },
                 },
               },
-            },
-            {
-              creatorId: userId, // Include courses created by the user
-            },
-          ]
+              {
+                creatorId: userId, // Include courses created by the user
+              },
+            ]
+          : [
+              {
+                purchases: {
+                  some: {
+                    userId, // Only include courses purchased by the user
+                  },
+                },
+              },
+            ]
         : undefined,
     },
     include: {
@@ -48,7 +59,7 @@ export const getCourses = async (
         },
       },
       attachments: true,
-      purchases: includePurchased
+      purchases: includePurchasesData
         ? {
             where: {
               userId,

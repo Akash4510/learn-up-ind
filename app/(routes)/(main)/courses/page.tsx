@@ -1,4 +1,4 @@
-import { getCategories } from "@/actions/category/get-categories";
+import { getCategories } from "@/actions/category";
 import { getCourses } from "@/actions/course/get-courses";
 import { CategoriesBar } from "@/components/categories-bar";
 import { CourseCard } from "@/components/course-card";

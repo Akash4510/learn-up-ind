@@ -1,7 +1,87 @@
-import React from "react";
+import { redirect } from "next/navigation";
+import { PAYOUT_STATUS } from "@prisma/client";
 
-const PayoutPage = () => {
-  return <div>PayoutPage</div>;
+import { auth } from "@/auth";
+import { getPayouts } from "@/actions/payout";
+import { getAffiliateByUserId } from "@/actions/affiliate/get-affiliate";
+import { TitleBlock } from "@/components/title-block";
+import { PayoutStatus } from "./_components/payout-status";
+
+const PayoutPage = async () => {
+  const session = await auth();
+
+  if (!session || !session.user) {
+    redirect("/");
+  }
+
+  const affiliate = await getAffiliateByUserId(session.user.id);
+
+  if (!affiliate) {
+    return (
+      <div>
+        <p>
+          You are not an affiliate yet! Please purchase a course to become an
+          affiliate and start earning
+        </p>
+      </div>
+    );
+  }
+
+  const payouts = await getPayouts(session.user.id);
+
+  let totalPendingPayout = 0;
+  payouts.forEach((payout) => {
+    if (payout.status === PAYOUT_STATUS.PENDING) {
+      totalPendingPayout += payout.amount;
+    }
+  });
+
+  return (
+    <div className="space-y-6">
+      <TitleBlock title="Payouts" subtitle="View your payout status" />
+
+      <div>
+        {payouts.length ? (
+          <div className="bg-accent border rounded-md p-4 space-y-3">
+            <TitleBlock
+              title="Total pending payout"
+              subtitle="Your total pending payout yet to be completed from our side"
+              size="sm"
+            />
+
+            <div className="space-y-3">
+              <input
+                type="text"
+                value={`₹ ${totalPendingPayout}`}
+                readOnly
+                className="w-full bg-background/60 rounded-md p-2 font-mono border-none focus:border-none outline-none focus:outline-none"
+              />
+
+              <div className="space-y-3">
+                <TitleBlock
+                  title="Payout status"
+                  subtitle="Below are the payout information which is still pending or being processed from our side"
+                  size="sm"
+                />
+
+                <div className="flex flex-col gap-2">
+                  {payouts
+                    .filter((p) => p.status === PAYOUT_STATUS.PENDING)
+                    .map((payout) => (
+                      <PayoutStatus key={payout.id} payout={payout} />
+                    ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <p>No payouts</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default PayoutPage;

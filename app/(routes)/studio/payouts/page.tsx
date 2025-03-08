@@ -1,0 +1,5 @@
+const PayoutsPage = () => {
+  return <div>PayoutsPage</div>;
+};
+
+export default PayoutsPage;

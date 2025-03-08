@@ -18,12 +18,24 @@ export const createOrder = async ({ courseId }: { courseId: string }) => {
   // Check the user in our database
   const user = await db.user.findUnique({
     where: { id: session.user.id },
+    include: {
+      kyc: true,
+    },
   });
 
   if (!user) {
     return {
       error: {
         message: "User not found!",
+      },
+    };
+  }
+
+  if (!user.kyc) {
+    return {
+      error: {
+        redirectTo: "/account/kyc",
+        message: "Please complete your KYC to purchase a course",
       },
     };
   }

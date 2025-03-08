@@ -22,7 +22,7 @@ export const createAffiliate = async (userId: string) => {
 
   if (existingAffiliate) {
     return {
-      error: {
+      success: {
         message: "User is already an affiliate!",
       },
     };

@@ -38,10 +38,6 @@ const AffiliatePage = async () => {
             Your completed referrals till now
           </p>
         </div>
-
-        <div>
-          <p className="text-5xl font-medium"></p>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
