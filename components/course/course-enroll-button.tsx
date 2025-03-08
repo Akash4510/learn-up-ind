@@ -125,7 +125,7 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
         disabled={isPending}
         asChild
       >
-        <Link href={`/courses/${course.id}`}>
+        <Link href={`/courses/${course.id}/chapters/${course.chapters[0].id}`}>
           <CircleCheck className="size-4" />
           Go to course
         </Link>

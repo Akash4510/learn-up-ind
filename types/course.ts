@@ -4,6 +4,7 @@ import {
   Category,
   Attachment,
   Chapter,
+  UserProgress,
 } from "@prisma/client";
 import { Creator } from "@/types/creator";
 
@@ -18,7 +19,9 @@ export type CourseWithProgress = Course & {
 
 export type CourseWithChapterAndProgress = Course & {
   category: Category | null;
-  chapters: Chapter[];
+  chapters: (Chapter & {
+    userProgress: UserProgress[] | null;
+  })[];
   attachments: Attachment[];
   purchases: CoursePurchase[];
   creator: Creator;

@@ -124,7 +124,10 @@ export const CourseCard = ({
             ) : isPurchased ? (
               // User Actions (Purchased)
               <Button size="sm" asChild>
-                <Link href={`/courses/${id}`} target="_blank">
+                <Link
+                  href={`/courses/${id}/chapters/${course.chapters[0].id}`}
+                  target="_blank"
+                >
                   <PlayCircle className="size-4" />
                   Continue
                 </Link>

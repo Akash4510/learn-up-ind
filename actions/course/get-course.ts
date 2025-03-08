@@ -25,6 +25,9 @@ export const getCourse = async (
         where: {
           isPublished: true, // Only include published chapters
         },
+        include: {
+          userProgress: includeProgress,
+        },
         orderBy: {
           position: "asc", // Order chapters by position
         },
