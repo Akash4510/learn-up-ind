@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { getCourse } from "@/actions/course/get-course";
+import { getCourse } from "@/actions/course";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { CourseBanner } from "@/components/course/course-banner";
 import { CourseContentPreview } from "@/components/course/course-content-preview";

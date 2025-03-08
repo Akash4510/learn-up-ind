@@ -1,6 +1,6 @@
 import { TitleBlock } from "@/components/title-block";
 import { CourseCard } from "@/components/course-card";
-import { getCourses } from "@/actions/course/get-courses";
+import { getCourses } from "@/actions/course";
 
 const ExplorePage = async () => {
   const courses = await getCourses({

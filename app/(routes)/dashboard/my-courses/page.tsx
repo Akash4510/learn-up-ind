@@ -3,7 +3,7 @@ import Link from "next/link";
 import { BookOpen } from "lucide-react";
 
 import { auth } from "@/auth";
-import { getCourses } from "@/actions/course/get-courses";
+import { getCourses } from "@/actions/course";
 import { TitleBlock } from "@/components/title-block";
 import { CourseCard } from "@/components/course-card";
 import { Button } from "@/components/ui/button";

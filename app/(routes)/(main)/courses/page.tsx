@@ -1,5 +1,5 @@
 import { getCategories } from "@/actions/category";
-import { getCourses } from "@/actions/course/get-courses";
+import { getCourses } from "@/actions/course";
 import { CategoriesBar } from "@/components/categories-bar";
 import { CourseCard } from "@/components/course-card";
 import { TitleBlock } from "@/components/title-block";

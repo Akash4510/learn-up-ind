@@ -7,7 +7,7 @@ import { TitleBlock } from "@/components/title-block";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/auth";
 import { CourseCard } from "@/components/course-card";
-import { getCourses } from "@/actions/course/get-courses";
+import { getCourses } from "@/actions/course";
 
 const CoursesPage = async () => {
   const session = await auth();
