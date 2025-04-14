@@ -37,6 +37,14 @@ const PayoutPage = async () => {
     }
   });
 
+  const pendingPayouts = payouts.filter(
+    (p) => p.status === PAYOUT_STATUS.PENDING
+  );
+  
+  const completedPayouts = payouts.filter(
+    (p) => p.status === PAYOUT_STATUS.COMPLETED
+  );
+
   return (
     <div className="space-y-6">
       <TitleBlock title="Payouts" subtitle="View your payout status" />
@@ -56,38 +64,56 @@ const PayoutPage = async () => {
 
       <div>
         {payouts.length ? (
-          <div className="bg-accent border rounded-md p-4 space-y-3">
-            <TitleBlock
-              title="Total pending payout"
-              subtitle="Your total pending payout yet to be completed from our side"
-              size="sm"
-            />
-
-            <div className="space-y-3">
-              <input
-                type="text"
-                value={`₹ ${totalPendingPayout}`}
-                readOnly
-                className="w-full bg-background/60 rounded-md p-2 font-mono border-none focus:border-none outline-none focus:outline-none"
-              />
-
-              <div className="space-y-3">
+          <>
+            {pendingPayouts.length > 0 && (
+              <div className="bg-accent border rounded-md p-4 space-y-3 mb-6">
                 <TitleBlock
-                  title="Payout status"
-                  subtitle="Below are the payout information which is still pending or being processed from our side"
+                  title="Total pending payout"
+                  subtitle="Your total pending payout yet to be completed from our side"
+                  size="sm"
+                />
+
+                <div className="space-y-3">
+                  <input
+                    type="text"
+                    value={`₹ ${totalPendingPayout}`}
+                    readOnly
+                    className="w-full bg-background/60 rounded-md p-2 font-mono border-none focus:border-none outline-none focus:outline-none"
+                  />
+
+                  <div className="space-y-3">
+                    <TitleBlock
+                      title="Pending Payouts"
+                      subtitle="Below are the payout requests which are still pending or being processed from our side"
+                      size="sm"
+                    />
+
+                    <div className="flex flex-col gap-2">
+                      {pendingPayouts.map((payout) => (
+                        <PayoutStatus key={payout.id} payout={payout} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {completedPayouts.length > 0 && (
+              <div className="bg-accent border rounded-md p-4 space-y-3">
+                <TitleBlock
+                  title="Completed Payouts"
+                  subtitle="Your payout history"
                   size="sm"
                 />
 
                 <div className="flex flex-col gap-2">
-                  {payouts
-                    .filter((p) => p.status === PAYOUT_STATUS.PENDING)
-                    .map((payout) => (
-                      <PayoutStatus key={payout.id} payout={payout} />
-                    ))}
+                  {completedPayouts.map((payout) => (
+                    <PayoutStatus key={payout.id} payout={payout} />
+                  ))}
                 </div>
               </div>
-            </div>
-          </div>
+            )}
+          </>
         ) : (
           <div>
             <p>No payout history</p>

@@ -36,15 +36,20 @@ export const PayoutRequestForm = ({ affiliateId, pendingPayout }: PayoutRequestF
       createPayout(affiliateId, payoutAmount)
         .then((data) => {
           if (data.error) {
+            console.error("Payout error:", data.error);
             toast.error(data.error.message);
+            if (data.error.details) {
+              console.error("Error details:", data.error.details);
+            }
           } else {
             toast.success(data.success.message);
             setAmount("");
             router.refresh();
           }
         })
-        .catch(() => {
-          toast.error("Something went wrong!");
+        .catch((error) => {
+          console.error("Payout request failed:", error);
+          toast.error("Something went wrong! Please try again.");
         });
     });
   };
@@ -61,7 +66,7 @@ export const PayoutRequestForm = ({ affiliateId, pendingPayout }: PayoutRequestF
           onChange={(e) => setAmount(e.target.value)}
           min="0"
           max={pendingPayout}
-          step="0.01"
+          step="10"
           className="max-w-[200px]"
         />
         
