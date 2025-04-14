@@ -3,9 +3,10 @@ import { PAYOUT_STATUS } from "@prisma/client";
 
 import { auth } from "@/auth";
 import { getPayouts } from "@/actions/payout";
-import { getAffiliateByUserId } from "@/actions/affiliate/get-affiliate";
+import { getAffiliateByUserId } from "@/actions/affiliate";
 import { TitleBlock } from "@/components/title-block";
 import { PayoutStatus } from "./_components/payout-status";
+import { PayoutRequestForm } from "./_components/payout-request-form";
 
 const PayoutPage = async () => {
   const session = await auth();
@@ -39,6 +40,19 @@ const PayoutPage = async () => {
   return (
     <div className="space-y-6">
       <TitleBlock title="Payouts" subtitle="View your payout status" />
+
+      <div className="bg-accent border rounded-md p-4 space-y-3">
+        <TitleBlock
+          title="Request Payout"
+          subtitle="Request a payout for your earnings"
+          size="sm"
+        />
+        
+        <PayoutRequestForm 
+          affiliateId={affiliate.id} 
+          pendingPayout={affiliate.pendingPayout} 
+        />
+      </div>
 
       <div>
         {payouts.length ? (
@@ -76,7 +90,7 @@ const PayoutPage = async () => {
           </div>
         ) : (
           <div>
-            <p>No payouts</p>
+            <p>No payout history</p>
           </div>
         )}
       </div>

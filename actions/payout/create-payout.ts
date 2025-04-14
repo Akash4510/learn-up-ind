@@ -1,0 +1,70 @@
+"use server";
+
+import { db } from "@/lib/prisma";
+import { PAYOUT_STATUS } from "@prisma/client";
+
+export const createPayout = async (affiliateId: string, amount: number) => {
+  try {
+    // Check if the affiliate exists
+    const affiliate = await db.affiliate.findUnique({
+      where: { id: affiliateId },
+    });
+
+    if (!affiliate) {
+      return {
+        error: {
+          message: "Affiliate not found",
+        },
+      };
+    }
+
+    // Check if the requested amount is valid
+    if (amount <= 0) {
+      return {
+        error: {
+          message: "Payout amount must be greater than zero",
+        },
+      };
+    }
+
+    // Check if the requested amount is available in pending payout
+    if (amount > affiliate.pendingPayout) {
+      return {
+        error: {
+          message: "Requested amount exceeds available pending payout",
+        },
+      };
+    }
+
+    // Create the payout
+    const payout = await db.payout.create({
+      data: {
+        affiliateId,
+        amount,
+        status: PAYOUT_STATUS.PENDING,
+      },
+    });
+
+    // Update the affiliate's pending payout
+    await db.affiliate.update({
+      where: { id: affiliateId },
+      data: {
+        pendingPayout: { decrement: amount },
+      },
+    });
+
+    return {
+      success: {
+        message: "Payout request created successfully",
+        payout,
+      },
+    };
+  } catch (error) {
+    console.error("Error creating payout:", error);
+    return {
+      error: {
+        message: "Failed to create payout request",
+      },
+    };
+  }
+};

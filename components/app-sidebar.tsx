@@ -42,15 +42,18 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Logo } from "./logo";
 import { dashboardMenus, studioMenus } from "@/constants/sidebar-menus";
+import { mainMenus } from "@/constants/nav-menus";
 import { useAuth } from "@/hooks/use-auth";
 import { logout } from "@/actions/auth";
 
 export const AppSidebar = () => {
   const pathname = usePathname();
+  const { user } = useAuth();
 
-  const menuGroups = pathname.startsWith("/dashboard")
-    ? dashboardMenus
-    : studioMenus;
+  // Determine which menu to show based on authentication status
+  const menuGroups = user 
+    ? (pathname.startsWith("/dashboard") ? dashboardMenus : studioMenus)
+    : [];
 
   return (
     <Sidebar collapsible="icon">
@@ -70,60 +73,80 @@ export const AppSidebar = () => {
       </SidebarHeader>
 
       <SidebarContent>
-        {menuGroups.map((group) => (
-          <SidebarGroup key={group.groupLabel}>
-            <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>
-            <SidebarMenu>
-              {group.menus.map((item) => (
-                <React.Fragment key={item.label}>
-                  {item.isCollapsible ? (
-                    // Render collapsible menu
-                    <Collapsible asChild defaultOpen={item.isOpen}>
+        {user ? (
+          // Render dashboard/studio menus for logged-in users
+          menuGroups.map((group) => (
+            <SidebarGroup key={group.groupLabel}>
+              <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>
+              <SidebarMenu>
+                {group.menus.map((item) => (
+                  <React.Fragment key={item.label}>
+                    {item.isCollapsible ? (
+                      // Render collapsible menu
+                      <Collapsible asChild defaultOpen={item.isOpen}>
+                        <SidebarMenuItem>
+                          <SidebarMenuButton asChild tooltip={item.label}>
+                            <Link href={item.url}>
+                              <item.icon />
+                              <span>{item.label}</span>
+                            </Link>
+                          </SidebarMenuButton>
+                          <CollapsibleTrigger asChild>
+                            <SidebarMenuAction className="data-[state=open]:rotate-90">
+                              <ChevronRight />
+                              <span className="sr-only">Toggle</span>
+                            </SidebarMenuAction>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent>
+                            <SidebarMenuSub>
+                              {item.items?.map((subItem) => (
+                                <SidebarMenuSubItem key={subItem.label}>
+                                  <SidebarMenuSubButton asChild>
+                                    <Link href={subItem.url}>
+                                      {subItem.icon && <subItem.icon />}
+                                      <span>{subItem.label}</span>
+                                    </Link>
+                                  </SidebarMenuSubButton>
+                                </SidebarMenuSubItem>
+                              ))}
+                            </SidebarMenuSub>
+                          </CollapsibleContent>
+                        </SidebarMenuItem>
+                      </Collapsible>
+                    ) : (
+                      // Render non-collapsible menu
                       <SidebarMenuItem>
                         <SidebarMenuButton asChild tooltip={item.label}>
                           <Link href={item.url}>
-                            <item.icon />
+                            {item.icon && <item.icon />}
                             <span>{item.label}</span>
                           </Link>
                         </SidebarMenuButton>
-                        <CollapsibleTrigger asChild>
-                          <SidebarMenuAction className="data-[state=open]:rotate-90">
-                            <ChevronRight />
-                            <span className="sr-only">Toggle</span>
-                          </SidebarMenuAction>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent>
-                          <SidebarMenuSub>
-                            {item.items?.map((subItem) => (
-                              <SidebarMenuSubItem key={subItem.label}>
-                                <SidebarMenuSubButton asChild>
-                                  <Link href={subItem.url}>
-                                    {subItem.icon && <subItem.icon />}
-                                    <span>{subItem.label}</span>
-                                  </Link>
-                                </SidebarMenuSubButton>
-                              </SidebarMenuSubItem>
-                            ))}
-                          </SidebarMenuSub>
-                        </CollapsibleContent>
                       </SidebarMenuItem>
-                    </Collapsible>
-                  ) : (
-                    // Render non-collapsible menu
-                    <SidebarMenuItem>
-                      <SidebarMenuButton asChild tooltip={item.label}>
-                        <Link href={item.url}>
-                          {item.icon && <item.icon />}
-                          <span>{item.label}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  )}
-                </React.Fragment>
+                    )}
+                  </React.Fragment>
+                ))}
+              </SidebarMenu>
+            </SidebarGroup>
+          ))
+        ) : (
+          // Render mainMenus for non-logged-in users
+          <SidebarGroup>
+            <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+            <SidebarMenu>
+              {mainMenus.map((item) => (
+                <SidebarMenuItem key={item.label}>
+                  <SidebarMenuButton asChild tooltip={item.label}>
+                    <Link href={item.href}>
+                      <item.icon />
+                      <span>{item.label}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroup>
-        ))}
+        )}
       </SidebarContent>
 
       <SidebarRail />

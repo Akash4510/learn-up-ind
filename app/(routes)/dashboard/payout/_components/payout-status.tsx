@@ -36,12 +36,12 @@ export const PayoutStatus = ({ payout }: PayoutStatusProps) => {
     >
       <Icon className="size-[1.15rem] shrink-0" />
       <div className="flex items-center justify-between gap-2 w-full">
-        <p>
+        <div>
           {payout.id}
           <Badge className="ml-2" variant="secondary">
             <span className="lowercase">{payout.status}</span>
           </Badge>
-        </p>
+        </div>
         <span>
           <IndianRupee className="size-4 mr-1 inline-block" />
           {payout.amount}

@@ -192,7 +192,6 @@ model Referral {
 
   affiliate Affiliate      @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
   purchase  CoursePurchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
-  payout    Payout?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -208,7 +207,6 @@ enum PAYOUT_STATUS {
 model Payout {
   id          String        @id @default(auto()) @map("_id") @db.ObjectId
   affiliateId String        @db.ObjectId
-  referralId  String        @unique @db.ObjectId
   amount      Float
   status      PAYOUT_STATUS @default(PENDING)
 
@@ -216,7 +214,6 @@ model Payout {
   transactionId String?
 
   affiliate Affiliate @relation(fields: [affiliateId], references: [id], onDelete: Cascade)
-  referral  Referral  @relation(fields: [referralId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

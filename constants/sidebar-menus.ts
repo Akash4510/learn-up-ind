@@ -21,6 +21,7 @@ import {
   // LayoutDashboard,
   // ClipboardCheck,
   ShieldCheck,
+  CheckCircle,
 } from "lucide-react";
 
 type Menu = {
@@ -146,63 +147,23 @@ export const studioMenus: MenuGroup[] = [
         url: "/studio",
         icon: BarChart3,
       },
-      // {
-      //   label: "User Insights",
-      //   url: "/studio/analytics/user-insights",
-      //   icon: Users,
-      // },
-      // {
-      //   label: "Course Performance",
-      //   url: "/studio/analytics/course-performance",
-      //   icon: BookOpen,
-      // },
     ],
   },
   {
     groupLabel: "User Management",
     menus: [
-      // {
-      //   label: "All Users",
-      //   url: "/studio/users",
-      //   icon: Users,
-      // },
       {
         label: "Roles & Permissions",
         url: "/studio/users/roles",
         icon: ShieldCheck,
       },
-      // {
-      //   label: "Activity Logs",
-      //   url: "/studio/users/activity-logs",
-      //   icon: ClipboardCheck,
-      // },
+      {
+        label: "KYC Approvals",
+        url: "/studio/kyc",
+        icon: CheckCircle,
+      },
     ],
   },
-  // {
-  //   groupLabel: "Media Management",
-  //   menus: [
-  //     {
-  //       label: "Home Page Media",
-  //       url: "/studio/media/home",
-  //       icon: LayoutDashboard,
-  //     },
-  //     {
-  //       label: "Live Offers Media",
-  //       url: "/studio/media/live-offers",
-  //       icon: Zap,
-  //     },
-  //     {
-  //       label: "Course Media",
-  //       url: "/studio/media/courses",
-  //       icon: Video,
-  //     },
-  //     {
-  //       label: "File Library",
-  //       url: "/studio/media/library",
-  //       icon: Folder,
-  //     },
-  //   ],
-  // },
   {
     groupLabel: "Course Management",
     menus: [
@@ -221,11 +182,6 @@ export const studioMenus: MenuGroup[] = [
         url: "/studio/courses/categories",
         icon: Folder,
       },
-      // {
-      //   label: "Reviews & Ratings",
-      //   url: "/studio/courses/reviews",
-      //   icon: Star,
-      // },
     ],
   },
   {
@@ -236,16 +192,6 @@ export const studioMenus: MenuGroup[] = [
         url: "/studio/payouts",
         icon: CreditCard,
       },
-      // {
-      //   label: "Transaction History",
-      //   url: "/studio/payouts/history",
-      //   icon: IndianRupee,
-      // },
-      // {
-      //   label: "Payout Settings",
-      //   url: "/studio/payouts/settings",
-      //   icon: Settings,
-      // },
     ],
   },
 ];

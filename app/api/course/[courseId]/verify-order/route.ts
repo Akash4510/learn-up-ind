@@ -89,15 +89,6 @@ export async function POST(
 
         referralStatus = "SUCCESS";
 
-        // Create the payout
-        await db.payout.create({
-          data: {
-            referralId: referral.id,
-            affiliateId: referral.affiliateId,
-            amount: referral.commissionEarned,
-          },
-        });
-
         // Update the affiliate earnings and pending payouts
         await db.affiliate.update({
           where: { referralCode },

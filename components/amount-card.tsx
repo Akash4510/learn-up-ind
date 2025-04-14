@@ -17,7 +17,7 @@ interface AmountCardProps {
 export const AmountCard = ({
   title,
   amount,
-  shouldAnimate,
+  shouldAnimate = true,
   duration = 2,
   className,
 }: AmountCardProps) => {
