@@ -67,7 +67,7 @@ const CahpterPage = async ({ params }: CahpterPageProps) => {
             <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
 
             <div className="w-full">
-              <VideoPlayer videoUrl="https://youtu.be/4BzC7ky0uw8?si=jR9OH_R7DmKEd5Rd" />
+              <VideoPlayer videoUrl={chapter.videoUrl || ""} />
             </div>
           </div>
 
