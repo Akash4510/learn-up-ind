@@ -28,10 +28,11 @@ export const PayoutDetails = ({ payout }: PayoutDetailsProps) => {
         <CardTitle className="flex items-center justify-between">
           <span>Payout Details</span>
           <Badge variant="outline" className="font-mono">
-            ID: {payout.id.substring(0, 8)}...
+            ID: {payout.id}
           </Badge>
         </CardTitle>
       </CardHeader>
+
       <CardContent className="space-y-6">
         <div className="space-y-4">
           <h3 className="text-lg font-medium">Amount</h3>
@@ -96,4 +97,4 @@ export const PayoutDetails = ({ payout }: PayoutDetailsProps) => {
       </CardContent>
     </Card>
   );
-}; 
+};

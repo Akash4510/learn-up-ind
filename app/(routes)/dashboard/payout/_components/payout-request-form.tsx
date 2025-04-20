@@ -14,21 +14,26 @@ interface PayoutRequestFormProps {
   pendingPayout: number;
 }
 
-export const PayoutRequestForm = ({ affiliateId, pendingPayout }: PayoutRequestFormProps) => {
+export const PayoutRequestForm = ({
+  affiliateId,
+  pendingPayout,
+}: PayoutRequestFormProps) => {
   const [isPending, startTransition] = useTransition();
   const [amount, setAmount] = useState<string>("");
   const router = useRouter();
 
   const handleRequestPayout = () => {
     const payoutAmount = parseFloat(amount);
-    
+
     if (isNaN(payoutAmount) || payoutAmount <= 0) {
       toast.error("Please enter a valid amount");
       return;
     }
-    
+
     if (payoutAmount > pendingPayout) {
-      toast.error(`Amount cannot exceed your available pending payout of ₹${pendingPayout}`);
+      toast.error(
+        `Amount cannot exceed your available pending payout of ₹${pendingPayout}`
+      );
       return;
     }
 
@@ -57,8 +62,8 @@ export const PayoutRequestForm = ({ affiliateId, pendingPayout }: PayoutRequestF
   return (
     <div className="space-y-2">
       <p className="text-xl pb-1">Available for payout: ₹{pendingPayout}</p>
-      
-      <div className="flex items-center gap-2">
+
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
         <Input
           type="number"
           placeholder="Enter amount"
@@ -67,22 +72,26 @@ export const PayoutRequestForm = ({ affiliateId, pendingPayout }: PayoutRequestF
           min="0"
           max={pendingPayout}
           step="10"
-          className="max-w-[200px]"
+          className="sm:max-w-[200px]"
         />
-        
-        <Button 
+
+        <Button
           onClick={handleRequestPayout}
-          disabled={isPending || !amount || parseFloat(amount) <= 0 || parseFloat(amount) > pendingPayout}
+          disabled={
+            isPending ||
+            !amount ||
+            parseFloat(amount) <= 0 ||
+            parseFloat(amount) > pendingPayout
+          }
         >
-          {isPending ? (
-            <Loader2 className="size-4 animate-spin mr-2" />
-          ) : null}
+          {isPending ? <Loader2 className="size-4 animate-spin mr-2" /> : null}
           Request Payout
         </Button>
       </div>
-      
+
       <p className="text-xs text-muted-foreground">
-        Enter the amount you want to request for payout. This will be deducted from your available pending payout.
+        Enter the amount you want to request for payout. This will be deducted
+        from your available pending payout.
       </p>
     </div>
   );

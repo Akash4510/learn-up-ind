@@ -48,16 +48,22 @@ export const PendingPayoutsList = ({ payouts }: PendingPayoutsListProps) => {
     <div className="space-y-4">
       {payouts.map((payout) => (
         <Card key={payout.id}>
-          <CardHeader className="pb-2">
+          <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">
+              <CardTitle className="text-lg flex items-center gap-2">
                 {payout.affiliate.user.name || "Unknown User"}
+
+                <Badge variant="outline" className="font-mono">
+                  Pyout Id: {payout.id}
+                </Badge>
               </CardTitle>
+
               <div className="flex items-center gap-2">
                 <div className="flex items-center font-bold">
                   <IndianRupee className="size-4 mr-1" />
                   {payout.amount}
                 </div>
+
                 <Button
                   variant="ghost"
                   size="icon"
@@ -71,15 +77,24 @@ export const PendingPayoutsList = ({ payouts }: PendingPayoutsListProps) => {
                 </Button>
               </div>
             </div>
-            <div className="flex items-center gap-2 mt-2">
-              <Badge variant="outline">
-                {payout.affiliate.user.email || "No email"}
-              </Badge>
-              <Badge variant="secondary">
-                {new Date(payout.createdAt).toLocaleDateString()}
-              </Badge>
+
+            <div className="flex flex-wrap items-center gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                User email:
+                <Badge variant="outline">
+                  {payout.affiliate.user.email || "No email"}
+                </Badge>
+              </div>
+
+              <div className="flex items-center gap-2">
+                Requested at:
+                <Badge variant="secondary">
+                  {new Date(payout.createdAt).toLocaleDateString()}
+                </Badge>
+              </div>
             </div>
           </CardHeader>
+
           {expandedPayoutId === payout.id && (
             <CardContent className="pt-0 space-y-6">
               <PayoutDetails payout={payout} />
@@ -93,4 +108,4 @@ export const PendingPayoutsList = ({ payouts }: PendingPayoutsListProps) => {
       ))}
     </div>
   );
-}; 
+};
