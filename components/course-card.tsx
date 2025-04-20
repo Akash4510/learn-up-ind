@@ -62,88 +62,92 @@ export const CourseCard = ({
             </Badge>
           )}
 
-          <span className="text-sm text-muted-foreground">
-            <BookOpen className="size-3 inline-flex mr-2" />
-            {chapters.length} chapters
-          </span>
+          {isPublished && (
+            <span className="text-sm text-muted-foreground">
+              <BookOpen className="size-3 inline-flex mr-2" />
+              {chapters.length} chapters
+            </span>
+          )}
         </div>
       </div>
 
       {/* Course Details */}
-      <div className="p-4 flex flex-col flex-grow">
-        {/* Title */}
-        <h3 className="text-lg font-semibold line-clamp-2">{title}</h3>
+      {isPublished && (
+        <div className="p-4 flex flex-col flex-grow">
+          {/* Title */}
+          <h3 className="text-lg font-semibold line-clamp-2">{title}</h3>
 
-        {/* Description */}
-        {description && (
-          <p className="text-sm text-muted-foreground text-pretty mt-0.5 line-clamp-3 flex-grow">
-            {description}
-          </p>
-        )}
+          {/* Description */}
+          {description && (
+            <p className="text-sm text-muted-foreground text-pretty mt-0.5 line-clamp-3 flex-grow">
+              {description}
+            </p>
+          )}
 
-        {/* Progress Bar */}
-        {isPurchased && progress !== undefined && (
-          <div className="mt-3">
-            <Progress value={progress} className="h-2" />
-            <span className="text-sm text-muted-foreground mt-1">
-              {40}% completed
-            </span>
-          </div>
-        )}
+          {/* Progress Bar */}
+          {isPurchased && progress !== undefined && (
+            <div className="mt-3">
+              <Progress value={progress} className="h-2" />
+              <span className="text-sm text-muted-foreground mt-1">
+                {40}% completed
+              </span>
+            </div>
+          )}
 
-        {/* Price and Status */}
-        <div className="flex items-center justify-between mt-4">
-          <div className="flex items-center gap-2">
-            {!isPurchased &&
-              price !== null &&
-              (price === 0 ? (
-                <span className="font-semibold flex items-center">Free</span>
+          {/* Price and Status */}
+          <div className="flex items-center justify-between mt-4">
+            <div className="flex items-center gap-2">
+              {!isPurchased &&
+                price !== null &&
+                (price === 0 ? (
+                  <span className="font-semibold flex items-center">Free</span>
+                ) : (
+                  <span className="text-lg font-semibold flex items-center">
+                    <IndianRupee className="size-5" />
+                    {price.toFixed(2)}
+                  </span>
+                ))}
+              {isCreator && !isPublished && (
+                <Badge variant="secondary" className="text-xs">
+                  Draft
+                </Badge>
+              )}
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-2">
+              {isCreator ? (
+                // Creator Actions
+                <Button size="sm" variant="outline" asChild>
+                  <Link href={`/studio/courses/${id}`}>
+                    <Edit className="size-4" />
+                    Edit
+                  </Link>
+                </Button>
+              ) : isPurchased ? (
+                // User Actions (Purchased)
+                <Button size="sm" asChild>
+                  <Link
+                    href={`/courses/${id}/chapters/${course.chapters[0].id}`}
+                    target="_blank"
+                  >
+                    <PlayCircle className="size-4" />
+                    Continue
+                  </Link>
+                </Button>
               ) : (
-                <span className="text-lg font-semibold flex items-center">
-                  <IndianRupee className="size-5" />
-                  {price.toFixed(2)}
-                </span>
-              ))}
-            {isCreator && !isPublished && (
-              <Badge variant="secondary" className="text-xs">
-                Draft
-              </Badge>
-            )}
-          </div>
-
-          {/* Actions */}
-          <div className="flex items-center gap-2">
-            {isCreator ? (
-              // Creator Actions
-              <Button size="sm" variant="outline" asChild>
-                <Link href={`/studio/courses/${id}`}>
-                  <Edit className="size-4" />
-                  Edit
-                </Link>
-              </Button>
-            ) : isPurchased ? (
-              // User Actions (Purchased)
-              <Button size="sm" asChild>
-                <Link
-                  href={`/courses/${id}/chapters/${course.chapters[0].id}`}
-                  target="_blank"
-                >
-                  <PlayCircle className="size-4" />
-                  Continue
-                </Link>
-              </Button>
-            ) : (
-              // User Actions (Not Purchased)
-              <Button size="sm" asChild>
-                <Link href={`/courses/${id}?action=enroll`} target="_blank">
-                  <ShoppingCart className="size-4" />
-                  Enroll
-                </Link>
-              </Button>
-            )}
+                // User Actions (Not Purchased)
+                <Button size="sm" asChild>
+                  <Link href={`/courses/${id}?action=enroll`} target="_blank">
+                    <ShoppingCart className="size-4" />
+                    Enroll
+                  </Link>
+                </Button>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

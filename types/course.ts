@@ -36,4 +36,6 @@ export type GetCoursesOptions = {
   includeSelfCreated?: boolean;
   includePurchasesData?: boolean;
   includeProgress?: boolean;
+  page?: number;
+  pageSize?: number;
 };

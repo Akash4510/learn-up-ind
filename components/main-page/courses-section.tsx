@@ -2,9 +2,22 @@ import { getCourses } from "@/actions/course";
 import { CourseCard } from "@/components/course-card";
 import { TitleBlock } from "@/components/title-block";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 export const CoursesSection = async () => {
-  const courses = await getCourses();
+  const publishedCourses = await getCourses({
+    isPublished: true,
+    page: 1,
+    pageSize: 5,
+  });
+
+  const unpublishedCourses = await getCourses({
+    isPublished: false,
+    page: 1,
+    pageSize: 5,
+  });
 
   return (
     <div>
@@ -20,16 +33,14 @@ export const CoursesSection = async () => {
 
         <ScrollArea className="rounded-md">
           <div className="flex w-max space-x-4 p-4 px-0">
-            {courses
-              .filter((course) => !course.isPublished)
-              .map((course) => (
-                <div
-                  key={course.id}
-                  className="w-[400px] max-w-[85vw] min-w-[300px]"
-                >
-                  <CourseCard course={course} />
-                </div>
-              ))}
+            {unpublishedCourses.map((course) => (
+              <div
+                key={course.id}
+                className="w-[400px] max-w-[85vw] min-w-[300px]"
+              >
+                <CourseCard course={course} />
+              </div>
+            ))}
           </div>
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
@@ -45,11 +56,10 @@ export const CoursesSection = async () => {
           />
         </div>
 
-        <ScrollArea className="rounded-md">
-          <div className="flex w-max space-x-4 p-4 px-0">
-            {courses
-              .filter((course) => course.isPublished)
-              .map((course) => (
+        <div className="space-y-5">
+          <ScrollArea className="rounded-md">
+            <div className="flex w-max space-x-4 p-4 px-0">
+              {publishedCourses.map((course) => (
                 <div
                   key={course.id}
                   className="w-[400px] max-w-[85vw] min-w-[300px]"
@@ -57,9 +67,19 @@ export const CoursesSection = async () => {
                   <CourseCard course={course} />
                 </div>
               ))}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+
+          <div className="w-full flex items-center justify-end">
+            <Button variant="link" asChild>
+              <Link href="/courses" className="flex items-center gap-2">
+                View all courses
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
           </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+        </div>
       </div>
     </div>
   );

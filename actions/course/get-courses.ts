@@ -14,7 +14,13 @@ export const getCourses = async (
     includeSelfCreated = false,
     includeProgress = false,
     includePurchasesData = true,
+    page,
+    pageSize,
   } = options;
+
+  // Calculate skip and take for pagination
+  const skip = page && pageSize ? (page - 1) * pageSize : undefined;
+  const take = pageSize;
 
   // Base query to fetch courses
   const courses = await db.course.findMany({
@@ -77,6 +83,8 @@ export const getCourses = async (
     orderBy: {
       createdAt: "desc",
     },
+    skip, // Number of records to skip
+    take, // Number of records to take
   });
 
   // Calculate progress for purchased courses
