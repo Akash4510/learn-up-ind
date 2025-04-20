@@ -1,10 +1,11 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
 import { getCourses } from "@/actions/course";
 import { CourseCard } from "@/components/course-card";
 import { TitleBlock } from "@/components/title-block";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 export const CoursesSection = async () => {
   const publishedCourses = await getCourses({
@@ -32,11 +33,11 @@ export const CoursesSection = async () => {
         </div>
 
         <ScrollArea className="rounded-md">
-          <div className="flex w-max space-x-4 p-4 px-0">
+          <div className="grid grid-cols-1 md:flex md:w-max md:space-x-4 p-4 px-0 gap-4 md:gap-0">
             {unpublishedCourses.map((course) => (
               <div
                 key={course.id}
-                className="w-[400px] max-w-[85vw] min-w-[300px]"
+                className="w-[400px] max-w-[88vw] min-w-[300px]"
               >
                 <CourseCard course={course} />
               </div>
@@ -58,11 +59,11 @@ export const CoursesSection = async () => {
 
         <div className="space-y-5">
           <ScrollArea className="rounded-md">
-            <div className="flex w-max space-x-4 p-4 px-0">
+            <div className="grid grid-cols-1 md:flex md:w-max md:space-x-4 p-4 px-0 gap-4 md:gap-0">
               {publishedCourses.map((course) => (
                 <div
                   key={course.id}
-                  className="w-[400px] max-w-[85vw] min-w-[300px]"
+                  className="w-[400px] max-w-[88vw] min-w-[300px]"
                 >
                   <CourseCard course={course} />
                 </div>
