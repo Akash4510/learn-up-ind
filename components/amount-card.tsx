@@ -24,9 +24,7 @@ export const AmountCard = ({
   return (
     <Card className={cn(className)}>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-lg font-medium text-muted-foreground">
-          {title}
-        </CardTitle>
+        <CardTitle className="text-lg font-medium">{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="flex items-center gap-2 text-2xl">
