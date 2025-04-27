@@ -58,10 +58,26 @@ const DashboardPage = async () => {
         />
 
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-          <AmountCard title="Today's Earning" amount={todayEarnings} />
-          <AmountCard title="Last Month's Earning" amount={lastMonthEarnings} />
-          <AmountCard title="Last Week's Earning" amount={lastWeekEarnings} />
-          <AmountCard title="Total Earning" amount={totalEarnings} />
+          <AmountCard
+            title="Today's Earning"
+            amount={todayEarnings}
+            className="bg-sky-700"
+          />
+          <AmountCard
+            title="Last Month's Earning"
+            amount={lastMonthEarnings}
+            className="bg-cyan-800"
+          />
+          <AmountCard
+            title="Last Week's Earning"
+            amount={lastWeekEarnings}
+            className="bg-secondary"
+          />
+          <AmountCard
+            title="Total Earning"
+            amount={totalEarnings}
+            className="bg-primary/70"
+          />
         </div>
       </div>
     </div>
