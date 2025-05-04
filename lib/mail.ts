@@ -13,7 +13,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   const confirmLink = `${domain}/auth/verify-email?token=${token}`;
 
   await resend.emails.send({
-    from: "learnupind.com",
+    from: "Acme <onboarding@resend.dev>",
     to: [email],
     subject: "Confirm your email",
     react: VerifyEmailTemplate({ confirmLink }),
@@ -26,7 +26,7 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
   console.log("resetLink - sending reset mail", resetLink);
 
   const res = await resend.emails.send({
-    from: "learnupind.com",
+    from: "Acme <onboarding@resend.dev>",
     to: [email],
     subject: "Reset your password",
     react: ResetPasswordTemplate({ resetLink }),
@@ -40,7 +40,7 @@ export const sendInvoiceEmail = async (
   invoiceDetails: InvoiceDetails
 ) => {
   const res = await resend.emails.send({
-    from: "learnupind.com",
+    from: "Acme <onboarding@resend.dev>",
     to: [email],
     subject: `Invoice for Your Purchase (Order #${invoiceDetails.orderId}) - Payment Confirmation`,
     react: InvoiceTemplate({ ...invoiceDetails }),
