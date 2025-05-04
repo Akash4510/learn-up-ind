@@ -19,7 +19,10 @@ export const WhyUPIND = () => {
       </div>
 
       <div>
-        <Accordion type="single" collapsible>
+        <Accordion
+          type="multiple"
+          className="grid grid-cols-1 md:grid-cols-2 gap-x-8"
+        >
           <AccordionItem value="item-1">
             <AccordionTrigger className="uppercase">
               <div className="flex items-center gap-2">

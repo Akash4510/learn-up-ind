@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { TitleBlock } from "@/components/title-block";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 export const Certificates = () => {
   return (
@@ -13,26 +12,22 @@ export const Certificates = () => {
         />
       </div>
 
-      <ScrollArea className="rounded-md">
-        <div className="relative flex w-full h-56 items-center justify-center gap-10">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <div
-              key={index}
-              className="w-72 h-44 bg-accent/10 rounded-md flex items-center justify-center"
-            >
-              <Image
-                src={`/images/certificates-${index + 1}.png`}
-                alt="Certificate"
-                quality={100}
-                width={150}
-                height={150}
-              />
-            </div>
-          ))}
-        </div>
-
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <div
+            key={index}
+            className="bg-accent/10 rounded-md flex items-center justify-center"
+          >
+            <Image
+              src={`/images/certificates-${index + 1}.png`}
+              alt="Certificate"
+              quality={100}
+              width={120}
+              height={120}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

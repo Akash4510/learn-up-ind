@@ -1,40 +1,56 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface AutoScrollProps {
   children: React.ReactNode;
   pauseDuration?: number;
   scrollDuration?: number;
+  infinite?: boolean;
 }
 
 export function AutoScroll({
   children,
   pauseDuration = 3000,
   scrollDuration = 500,
+  infinite = true,
 }: AutoScrollProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
   const pauseRef = useRef<NodeJS.Timeout | null>(null);
+  const [itemsCount, setItemsCount] = useState(0);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    let isScrolling = false;
-    let currentIndex = 0;
     const items = Array.from(container.children) as HTMLElement[];
+    setItemsCount(items.length);
     if (items.length === 0) return;
 
+    let isScrolling = false;
+    let currentIndex = 0;
     const itemWidth = items[0].offsetWidth;
     const gap = parseInt(getComputedStyle(container).gap) || 0;
     const scrollAmount = itemWidth + gap;
 
     const scrollToIndex = (index: number) => {
+      // Reset to first item if we've reached the end in infinite mode
       if (index >= items.length) {
-        currentIndex = 0;
-        container.scrollTo({ left: 0, behavior: "instant" });
-        return;
+        if (infinite) {
+          // Instantly reset to first item without animation
+          container.scrollTo({ left: 0, behavior: "instant" });
+          currentIndex = 0;
+          // Start scrolling to the next item after a brief pause
+          pauseRef.current = setTimeout(() => {
+            scrollToIndex(1);
+          }, pauseDuration / 2); // Shorter pause when looping
+          return;
+        } else {
+          // Stop at the last item
+          isScrolling = false;
+          return;
+        }
       }
 
       const targetScroll = index * scrollAmount;
@@ -53,10 +69,10 @@ export function AutoScroll({
           animationRef.current = requestAnimationFrame(animateScroll);
         } else {
           isScrolling = false;
-          // Start pause timer
+          currentIndex = index;
+          // Pause before next scroll
           pauseRef.current = setTimeout(() => {
-            currentIndex++;
-            scrollToIndex(currentIndex);
+            scrollToIndex(currentIndex + 1);
           }, pauseDuration);
         }
       };
@@ -68,8 +84,14 @@ export function AutoScroll({
     // Easing function
     const easeOutQuad = (t: number) => t * (2 - t);
 
-    // Start scrolling after container is ready
-    const initTimer = setTimeout(() => scrollToIndex(1), 1000);
+    // Start scrolling
+    const startScrolling = () => {
+      if (items.length > 1) {
+        scrollToIndex(1); // Start by scrolling to the second item
+      }
+    };
+
+    const initTimer = setTimeout(startScrolling, 1000);
 
     // Pause on hover
     const handleMouseEnter = () => {
@@ -85,7 +107,7 @@ export function AutoScroll({
     };
 
     const handleMouseLeave = () => {
-      if (!isScrolling) {
+      if (!isScrolling && items.length > 1) {
         scrollToIndex(currentIndex);
       }
     };
@@ -106,7 +128,7 @@ export function AutoScroll({
       container.removeEventListener("mouseenter", handleMouseEnter);
       container.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [pauseDuration, scrollDuration]);
+  }, [pauseDuration, scrollDuration, infinite, itemsCount]);
 
   return (
     <div
@@ -115,6 +137,8 @@ export function AutoScroll({
       style={{ scrollBehavior: "smooth" }}
     >
       {children}
+      {/* Add cloned items for seamless infinite scroll */}
+      {infinite && children}
     </div>
   );
 }

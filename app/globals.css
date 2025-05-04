@@ -23,6 +23,14 @@ h2 {
   display: none;
 }
 
+/* Optional: Add these if you want smoother snapping */
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+.snap-start {
+  scroll-snap-align: start;
+}
+
 .bg-gradient {
   background: var(--gradient);
 }

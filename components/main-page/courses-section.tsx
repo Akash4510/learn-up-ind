@@ -6,6 +6,7 @@ import { CourseCard } from "@/components/course-card";
 import { TitleBlock } from "@/components/title-block";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+import { AutoScroll } from "../auto-scroll";
 
 export const CoursesSection = async () => {
   const publishedCourses = await getCourses({
@@ -32,19 +33,16 @@ export const CoursesSection = async () => {
           />
         </div>
 
-        <ScrollArea className="rounded-md">
-          <div className="grid grid-cols-1 md:flex md:w-max md:space-x-4 p-4 px-0 gap-4 md:gap-0">
-            {unpublishedCourses.map((course) => (
-              <div
-                key={course.id}
-                className="w-[400px] max-w-[88vw] min-w-[300px]"
-              >
-                <CourseCard course={course} />
-              </div>
-            ))}
-          </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
+        <AutoScroll pauseDuration={3000} scrollDuration={500}>
+          {unpublishedCourses.map((course) => (
+            <div
+              key={course.id}
+              className="w-full max-w-full min-w-[300px] inline-block snap-start mr-4 last:mr-0 md:max-w-[400px]"
+            >
+              <CourseCard course={course} />
+            </div>
+          ))}
+        </AutoScroll>
       </div>
 
       <div className="space-y-10 my-10">
@@ -59,11 +57,11 @@ export const CoursesSection = async () => {
 
         <div className="space-y-5">
           <ScrollArea className="rounded-md">
-            <div className="grid grid-cols-1 md:flex md:w-max md:space-x-4 p-4 px-0 gap-4 md:gap-0">
+            <div className="grid grid-cols-1 md:flex md:w-max md:space-x-4 pb-4 px-0 gap-4 md:gap-0">
               {publishedCourses.map((course) => (
                 <div
                   key={course.id}
-                  className="w-[400px] max-w-[88vw] min-w-[300px]"
+                  className="md:w-[400px] md:max-w-[88vw] min-w-[300px]"
                 >
                   <CourseCard course={course} />
                 </div>
