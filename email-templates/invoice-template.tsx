@@ -36,8 +36,12 @@ export const InvoiceTemplate = ({
           Course Information
         </h2>
         <div className="bg-gray-50 p-4 rounded-lg">
-          <p className="font-medium text-gray-800">Id: {courseId}</p>
-          <p className="font-medium text-gray-800">{courseName}</p>
+          <p className="text-gray-800">
+            Id: <span className="font-bold">{courseId}</span>
+          </p>
+          <p className="text-gray-800">
+            Course Name: <span className="font-bold">{courseName}</span>
+          </p>
         </div>
       </div>
 
