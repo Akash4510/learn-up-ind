@@ -14,7 +14,7 @@ import { CourseWithProgress } from "@/types/course";
 import { useAuth } from "@/hooks/use-auth";
 import { createAffiliate } from "@/actions/affiliate";
 import { InvoiceDetails } from "@/types/invoice";
-import { sendInvoiceEmail } from "@/lib/mail";
+import { sendPurchaseInvoiceEmail } from "@/actions/invoice/send-purchase-invoice-email";
 
 interface CourseEnrollButtonProps {
   course: CourseWithProgress;
@@ -114,7 +114,7 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
                       },
                     };
 
-                    sendInvoiceEmail(
+                    sendPurchaseInvoiceEmail(
                       metadata.user.email as string,
                       invoiceDetails
                     );

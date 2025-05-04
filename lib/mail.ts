@@ -5,7 +5,7 @@ import { ResetPasswordTemplate } from "@/email-templates/reset-password-template
 import { InvoiceDetails } from "@/types/invoice";
 import { InvoiceTemplate } from "@/email-templates/invoice-template";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY!);
 
 const domain = process.env.NEXT_PUBLIC_APP_URL!;
 
