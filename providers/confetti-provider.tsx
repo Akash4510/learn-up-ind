@@ -11,7 +11,7 @@ export const ConfettiProvider = () => {
 
   return (
     <ReactConfetti
-      className="pointer-events-none z-[99999]"
+      className="pointer-events-none z-[99999] overflow-hidden"
       numberOfPieces={500}
       recycle={false}
       onConfettiComplete={() => {
