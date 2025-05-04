@@ -2,6 +2,8 @@ import { Resend } from "resend";
 
 import { VerifyEmailTemplate } from "@/email-templates/verify-email-template";
 import { ResetPasswordTemplate } from "@/email-templates/reset-password-template";
+import { InvoiceDetails } from "@/types/invoice";
+import { InvoiceTemplate } from "@/email-templates/invoice-template";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -28,6 +30,20 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
     to: [email],
     subject: "Reset your password",
     react: ResetPasswordTemplate({ resetLink }),
+  });
+
+  console.log("res", res);
+};
+
+export const sendInvoiceEmail = async (
+  email: string,
+  invoiceDetails: InvoiceDetails
+) => {
+  const res = await resend.emails.send({
+    from: "learnupind.com",
+    to: [email],
+    subject: `Invoice for Your Purchase (Order #${invoiceDetails.orderId}) - Payment Confirmation`,
+    react: InvoiceTemplate({ ...invoiceDetails }),
   });
 
   console.log("res", res);

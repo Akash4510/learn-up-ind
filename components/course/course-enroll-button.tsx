@@ -13,6 +13,8 @@ import { useConfettiStore } from "@/hooks/use-confetti-store";
 import { CourseWithProgress } from "@/types/course";
 import { useAuth } from "@/hooks/use-auth";
 import { createAffiliate } from "@/actions/affiliate";
+import { InvoiceDetails } from "@/types/invoice";
+import { sendInvoiceEmail } from "@/lib/mail";
 
 interface CourseEnrollButtonProps {
   course: CourseWithProgress;
@@ -97,6 +99,26 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
                       }
                     });
 
+                    const invoiceDetails: InvoiceDetails = {
+                      amount: String(price),
+                      orderId: order.id,
+                      date: metadata.purchaseDate.toLocaleString(),
+                      courseId: metadata.courseId,
+                      courseName: metadata.courseName,
+                      paymentId: response.razorpay_payment_id,
+                      user: {
+                        name: metadata.user.name as string,
+                        email: metadata.user.email as string,
+                        state: metadata.user.state as string,
+                        country: metadata.user.country as string,
+                      },
+                    };
+
+                    sendInvoiceEmail(
+                      metadata.user.email as string,
+                      invoiceDetails
+                    );
+
                     // Refresh the page
                     router.refresh();
                   }
@@ -121,7 +143,7 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
     return (
       <Button
         size="sm"
-        className="w-full bg-emerald-500 hover:bg-emerald-600 text-primary"
+        className="w-full bg-emerald-500 hover:bg-emerald-600"
         disabled={isPending}
         asChild
       >

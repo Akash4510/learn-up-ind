@@ -94,7 +94,16 @@ export const createOrder = async ({ courseId }: { courseId: string }) => {
       order,
       metadata: {
         userId: user.id,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          country: user.country,
+          state: user.state,
+        },
         courseId: course.id,
+        courseName: course.title,
+        purchaseDate: order.created_at,
       },
     },
   };
