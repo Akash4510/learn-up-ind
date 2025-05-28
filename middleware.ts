@@ -39,7 +39,7 @@ export default auth((req) => {
 
   if (isApiAuthRoute) {
     response = NextResponse.next();
-  } else if (isAuthRoute || nextUrl.pathname === "/") {
+  } else if (isAuthRoute) {
     if (isLoggedin) {
       response = NextResponse.redirect(
         new URL(DEFAULT_LOGIN_REDIRECT, nextUrl)
