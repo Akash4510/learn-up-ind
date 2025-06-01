@@ -80,7 +80,7 @@ export const ChapterVideoForm = ({
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="bg-accent rounded-md p-4">
+        <div className="bg-card rounded-md p-4">
           <FormField
             control={control}
             name="videoUrl"
@@ -95,7 +95,7 @@ export const ChapterVideoForm = ({
                       variant="secondary"
                       size="sm"
                       disabled={isPending}
-                      className="bg-accent hover:bg-muted-foreground/20 h-8 transition-all"
+                      className="h-8 transition-all"
                       onClick={() => {
                         toggleEditing();
 
@@ -147,7 +147,7 @@ export const ChapterVideoForm = ({
                       {...field}
                     />
                   ) : (
-                    <p className="font-light text-sm py-2 bg-background/30 px-4 rounded-md font-mono opacity-75">
+                    <p className="font-light text-sm py-2 bg-background/60 px-4 rounded-md font-mono opacity-75">
                       {field.value || "No video url added"}
                     </p>
                   )}

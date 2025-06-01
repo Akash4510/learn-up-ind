@@ -25,7 +25,7 @@ export const ReferralLinkBlock = ({ code }: ReferralLinkBlockProps) => {
   };
 
   return (
-    <div className="bg-accent border rounded-md p-4 space-y-3">
+    <div className="bg-card border rounded-md p-4 space-y-3">
       <TitleBlock
         title="Your affiliate link"
         subtitle="You can directly share the app link with your refferal code!"

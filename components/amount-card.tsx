@@ -27,8 +27,8 @@ export const AmountCard = ({
         <CardTitle className="text-lg font-medium">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex items-center gap-2 text-2xl">
-          <IndianRupee className="size-5" />{" "}
+        <div className="flex items-center gap-2 text-[1.75rem] font-bold">
+          <IndianRupee className="size-6" />{" "}
           {shouldAnimate ? (
             <CountUp end={amount} duration={duration} />
           ) : (

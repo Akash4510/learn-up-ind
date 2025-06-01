@@ -24,7 +24,7 @@ export const ReferralCodeBlock = ({ code }: ReferralCodeBlockProps) => {
   };
 
   return (
-    <div className="bg-accent border rounded-md p-4 space-y-3">
+    <div className="bg-card border rounded-md p-4 space-y-3">
       <TitleBlock
         title="Your affiliate code"
         subtitle="Share your referral code to others! Users can make purchase using your referral code"

@@ -53,7 +53,7 @@ export const AttachmentForm = ({
   };
 
   return (
-    <div className="bg-accent rounded-md p-4">
+    <div className="bg-card rounded-md p-4">
       <div className="text-base flex items-center justify-between gap-4 px-0.5">
         <p className="text-base">Course attachments</p>
 
@@ -63,7 +63,7 @@ export const AttachmentForm = ({
             variant="secondary"
             size="sm"
             disabled={isPending}
-            className="bg-accent hover:bg-muted-foreground/20 h-8 transition-all"
+            className="h-8 transition-all"
             onClick={() => {
               toggleEditing();
             }}
@@ -109,7 +109,7 @@ export const AttachmentForm = ({
             ))}
           </div>
         ) : (
-          <p className="font-light text-sm py-2 bg-background/30 px-4 rounded-md font-mono opacity-75">
+          <p className="font-light text-sm py-2 bg-background/60 px-4 rounded-md font-mono opacity-75">
             No attachments yet
           </p>
         )}

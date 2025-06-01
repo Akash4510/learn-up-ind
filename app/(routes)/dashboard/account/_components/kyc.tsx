@@ -18,7 +18,7 @@ export const KYC = ({ user }: PersonalInfoProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
 
   return (
-    <div className="space-y-4 border rounded-md p-4">
+    <div className="space-y-4 border rounded-md p-4 bg-card">
       {!user.kyc && (
         <AlertMessage
           message="You have not completed your KYC. Please complete your KYC to receive payouts."
@@ -49,7 +49,7 @@ export const KYC = ({ user }: PersonalInfoProps) => {
               </Badge>
             )}
           </h3>
-          <p className="text-sm text-red-400">
+          <p className="text-sm text-destructive">
             Please make sure your KYC and bank details are correct. This will
             affect your payouts.
           </p>

@@ -154,3 +154,9 @@ function getMonthName(date: Date) {
 
   return months[date.getMonth()];
 }
+
+export function truncateDecimals(num: number, digits: number) {
+  const [int, dec] = num.toString().split(".");
+  if (!dec || digits <= 0) return parseInt(int, 10);
+  return parseFloat(`${int}.${dec.substring(0, digits)}`);
+}

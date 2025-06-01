@@ -54,7 +54,7 @@ export const ThumbnailForm = ({ courseId, thumbnail }: ThumbnailFormProps) => {
   };
 
   return (
-    <div className="bg-accent rounded-md p-4">
+    <div className="bg-card rounded-md p-4">
       <div className="text-base flex items-center justify-between gap-4 px-0.5">
         <p className="text-base">Course thumbnail</p>
 
@@ -64,7 +64,7 @@ export const ThumbnailForm = ({ courseId, thumbnail }: ThumbnailFormProps) => {
             variant="secondary"
             size="sm"
             disabled={isPending}
-            className="bg-accent hover:bg-muted-foreground/20 h-8 transition-all"
+            className="h-8 transition-all"
             onClick={() => {
               toggleEditing();
             }}
@@ -109,7 +109,7 @@ export const ThumbnailForm = ({ courseId, thumbnail }: ThumbnailFormProps) => {
             </div>
           </div>
         ) : thumbnail ? (
-          <div className="rounded-md bg-background/30 aspect-video flex items-center justify-center relative">
+          <div className="rounded-md bg-background/60 aspect-video flex items-center justify-center relative">
             <Image
               src={thumbnail}
               alt="course-thumbnail"
@@ -118,7 +118,7 @@ export const ThumbnailForm = ({ courseId, thumbnail }: ThumbnailFormProps) => {
             />
           </div>
         ) : (
-          <div className="rounded-md bg-background/30 aspect-video flex flex-col gap-2 items-center justify-center relative">
+          <div className="rounded-md bg-background/60 aspect-video flex flex-col gap-2 items-center justify-center relative">
             <ImageIcon className="size-7" />
             <p className="text-xs md:text-sm text-muted-foreground">
               No thumbnail added

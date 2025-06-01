@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createPayout } from "@/actions/payout";
+import { truncateDecimals } from "@/lib/utils";
 
 interface PayoutRequestFormProps {
   affiliateId: string;
@@ -61,7 +62,9 @@ export const PayoutRequestForm = ({
 
   return (
     <div className="space-y-2">
-      <p className="text-xl pb-1">Available for payout: ₹{pendingPayout}</p>
+      <p className="text-xl pb-1">
+        Available for payout: ₹{truncateDecimals(pendingPayout, 2)}
+      </p>
 
       <div className="flex flex-col sm:flex-row sm:items-center gap-2">
         <Input

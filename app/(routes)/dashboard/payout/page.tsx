@@ -40,7 +40,7 @@ const PayoutPage = async () => {
   const pendingPayouts = payouts.filter(
     (p) => p.status === PAYOUT_STATUS.PENDING
   );
-  
+
   const completedPayouts = payouts.filter(
     (p) => p.status === PAYOUT_STATUS.COMPLETED
   );
@@ -49,16 +49,16 @@ const PayoutPage = async () => {
     <div className="space-y-6">
       <TitleBlock title="Payouts" subtitle="View your payout status" />
 
-      <div className="bg-accent border rounded-md p-4 space-y-3">
+      <div className="bg-card border rounded-md p-4 space-y-3">
         <TitleBlock
           title="Request Payout"
           subtitle="Request a payout for your earnings"
           size="sm"
         />
-        
-        <PayoutRequestForm 
-          affiliateId={affiliate.id} 
-          pendingPayout={affiliate.pendingPayout} 
+
+        <PayoutRequestForm
+          affiliateId={affiliate.id}
+          pendingPayout={affiliate.pendingPayout}
         />
       </div>
 
@@ -66,7 +66,7 @@ const PayoutPage = async () => {
         {payouts.length ? (
           <>
             {pendingPayouts.length > 0 && (
-              <div className="bg-accent border rounded-md p-4 space-y-3 mb-6">
+              <div className="bg-card border rounded-md p-4 space-y-3 mb-6">
                 <TitleBlock
                   title="Total pending payout"
                   subtitle="Your total pending payout yet to be completed from our side"
@@ -99,7 +99,7 @@ const PayoutPage = async () => {
             )}
 
             {completedPayouts.length > 0 && (
-              <div className="bg-accent border rounded-md p-4 space-y-3">
+              <div className="bg-card border rounded-md p-4 space-y-3">
                 <TitleBlock
                   title="Completed Payouts"
                   subtitle="Your payout history"

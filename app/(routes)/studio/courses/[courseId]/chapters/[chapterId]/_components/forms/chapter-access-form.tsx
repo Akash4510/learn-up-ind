@@ -65,7 +65,7 @@ export const ChapterAccessForm = ({
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="bg-accent rounded-md p-4">
+        <div className="bg-card rounded-md p-4">
           <FormField
             control={control}
             name="isFree"

@@ -24,7 +24,7 @@ export const Preview = ({ value }: PreviewProps) => {
   }, [value, editor]);
 
   return (
-    <div className="bg-background/30 rounded-md">
+    <div className="bg-background/60 rounded-md">
       <EditorContent editor={editor} />
     </div>
   );

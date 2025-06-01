@@ -31,7 +31,7 @@ export const Editor = ({ onChange, value }: EditorProps) => {
   }
 
   return (
-    <div className="bg-background/10 rounded-md">
+    <div className="bg-background/60 rounded-md">
       <div className="flex gap-2 p-2 border-b">
         <Button
           type="button"

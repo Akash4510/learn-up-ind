@@ -77,7 +77,7 @@ export const TitleForm = ({ courseId, title }: TitleFormProps) => {
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="bg-accent rounded-md p-4">
+        <div className="bg-card rounded-md p-4">
           <FormField
             control={control}
             name="title"
@@ -92,7 +92,7 @@ export const TitleForm = ({ courseId, title }: TitleFormProps) => {
                       variant="secondary"
                       size="sm"
                       disabled={isPending}
-                      className="bg-accent hover:bg-muted-foreground/20 h-8 transition-all"
+                      className="h-8 transition-all"
                       onClick={() => {
                         toggleEditing();
 
@@ -132,7 +132,7 @@ export const TitleForm = ({ courseId, title }: TitleFormProps) => {
                       {...field}
                     />
                   ) : (
-                    <p className="font-medium py-2 bg-background/30 px-4 rounded-md">
+                    <p className="font-medium py-2 bg-background/60 px-4 rounded-md">
                       {field.value}
                     </p>
                   )}

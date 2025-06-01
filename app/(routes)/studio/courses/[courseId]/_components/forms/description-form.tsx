@@ -82,7 +82,7 @@ export const DescriptionForm = ({
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="bg-accent rounded-md p-4">
+        <div className="bg-card rounded-md p-4">
           <FormField
             control={control}
             name="description"
@@ -147,11 +147,11 @@ export const DescriptionForm = ({
                       {...field}
                     />
                   ) : field.value ? (
-                    <p className="font-medium text-sm py-2 bg-background/10 px-4 rounded-md">
+                    <p className="font-medium text-sm py-2 bg-background/60 px-4 rounded-md">
                       {field.value}
                     </p>
                   ) : (
-                    <p className="font-light text-sm py-2 bg-background/30 px-4 rounded-md font-mono opacity-75">
+                    <p className="font-light text-sm py-2 bg-background/60 px-4 rounded-md font-mono opacity-75">
                       No description added
                     </p>
                   )}

@@ -95,7 +95,7 @@ export const ChaptersForm = ({ courseId, chapters }: DescriptionFormProps) => {
   };
 
   return (
-    <div className="relative bg-accent rounded-md p-4">
+    <div className="relative bg-card rounded-md p-4">
       {isReordering && (
         <div className="absolute z-10 h-full w-full inset-0 rounded-md flex items-center justify-center bg-background/80">
           <Loader2 className="size-6 animate-spin" />
@@ -111,7 +111,7 @@ export const ChaptersForm = ({ courseId, chapters }: DescriptionFormProps) => {
             variant="secondary"
             size="sm"
             disabled={isPending}
-            className="bg-accent hover:bg-muted-foreground/20 h-8 transition-all"
+            className="h-8 transition-all"
             onClick={() => {
               toggleCreating();
               setTimeout(() => {
@@ -183,7 +183,7 @@ export const ChaptersForm = ({ courseId, chapters }: DescriptionFormProps) => {
         {chapters.length !== 0 ? (
           <ChaptersList data={chapters} onEdit={onEdit} onReorder={onReorder} />
         ) : (
-          <p className="font-light text-sm py-2 bg-background/30 px-4 rounded-md font-mono opacity-75">
+          <p className="font-light text-sm py-2 bg-background/60 px-4 rounded-md font-mono opacity-75">
             No chapters
           </p>
         )}

@@ -16,7 +16,7 @@ export const PersonalInfo = ({ user }: PersonalInfoProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
 
   return (
-    <div className="space-y-4 border rounded-md p-4">
+    <div className="space-y-4 border rounded-md p-4 bg-card">
       <div className="flex justify-between items-start">
         <div className="space-y-0.5">
           <h3 className="text-2xl font-bold flex flex-col md:flex-row md:items-center gap-1.5 md:gap-4">
