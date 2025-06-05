@@ -98,6 +98,15 @@ export interface HomePageContent {
   };
 }
 
+export interface AboutPageContent {
+  image: {
+    asset: SanityImageSource;
+    alt: string;
+  };
+  title: string;
+  aboutText: string;
+}
+
 // Image metadata types
 export interface ImageMetadata {
   _id: string;

@@ -136,3 +136,18 @@ export const homePageQuery = `*[_type == "homePage"][0] {
     }
   }
 }`;
+
+export const aboutPageQuery = `*[_type == "aboutPage"][0] {
+  image {
+    asset->{
+      _id,
+      url,
+      metadata {
+        dimensions
+      }
+    },
+    alt
+  },
+  title,
+  aboutText
+}`;

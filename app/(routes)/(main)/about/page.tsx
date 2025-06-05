@@ -1,38 +1,36 @@
 import Image from "next/image";
 
-const AboutPage = () => {
+import { sanityClient } from "@/lib/sanity/client";
+import { aboutPageQuery } from "@/lib/sanity/queries";
+import { AboutPageContent } from "@/lib/sanity/types";
+import { urlFor } from "@/lib/sanity/utils";
+
+async function getAboutPageContent() {
+  const aboutPageContent: AboutPageContent = await sanityClient.fetch(
+    aboutPageQuery
+  );
+  return aboutPageContent;
+}
+
+const AboutPage = async () => {
+  const content = await getAboutPageContent();
+
   return (
-    <div className="flex flex-col lg:flex-row gap-4 mb-12">
-      <div className="overflow-hidden">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-12">
+      <div className="relative overflow-hidden">
         <Image
-          src="/images/about.png"
-          alt="About us"
-          layout="responsive"
-          width={1920}
-          height={1080}
+          src={urlFor(content.image).url()}
+          alt={content.image.alt || "About us"}
+          fill
           className="object-cover"
         />
       </div>
+
       <div>
         <div className="p-4 py-6 mb-10 space-y-4">
-          <h1 className="text-3xl md:text-4xl">About LearnUPIND</h1>
+          <h1 className="text-3xl md:text-4xl">{content.title}</h1>
 
-          <div className="space-y-1.5">
-            <p>
-              Its started on [__DATE__] Since then we are inspiring youngsters
-              or those people who willing to learn the valuable and modish
-              courses.
-            </p>
-            <p>
-              We are trying to bring learning to people instead of people to
-              learning. Hence, we are trying to modify their entrepreneurship
-              nature.
-            </p>
-            <p>
-              Here we are with a lot of courses designed in a way that will help
-              people to learn a lot of things and take things to a new level.
-            </p>
-          </div>
+          <div className="space-y-1.5">{content.aboutText}</div>
         </div>
       </div>
     </div>
