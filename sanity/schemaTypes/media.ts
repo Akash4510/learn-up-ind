@@ -37,6 +37,33 @@ export default {
       ],
     },
 
+    // 2. About Page Image (single)
+    {
+      name: 'ceo',
+      type: 'image',
+      title: 'CEO Image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+        {
+          name: 'name',
+          type: 'string',
+          title: 'Name',
+        },
+        {
+          name: 'about',
+          type: 'string',
+          title: 'About CEO',
+        },
+      ],
+    },
+
     // 3. Certificates Images (array)
     {
       name: 'certificateImages',

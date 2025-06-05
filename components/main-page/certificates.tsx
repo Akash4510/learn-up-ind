@@ -1,8 +1,14 @@
 import Image from "next/image";
 
 import { TitleBlock } from "@/components/title-block";
+import { MediaDocument } from "@/lib/sanity/types";
+import { urlFor } from "@/lib/sanity/utils";
 
-export const Certificates = () => {
+export const Certificates = ({
+  certificateImages,
+}: {
+  certificateImages?: MediaDocument["certificateImages"];
+}) => {
   return (
     <div className="my-10 lg:mt-20 space-y-12 py-4">
       <div className="lg:text-center">
@@ -13,14 +19,14 @@ export const Certificates = () => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-        {Array.from({ length: 4 }).map((_, index) => (
+        {certificateImages?.map((certImg, index) => (
           <div
             key={index}
             className="bg-accent/10 rounded-md flex items-center justify-center"
           >
             <Image
-              src={`/images/certificates-${index + 1}.png`}
-              alt="Certificate"
+              src={urlFor(certImg).url()}
+              alt={certImg.alt || "certificate"}
               quality={100}
               width={120}
               height={120}

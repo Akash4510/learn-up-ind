@@ -9,19 +9,33 @@ import { Testimonials } from "@/components/main-page/testimonials";
 import { Certificates } from "@/components/main-page/certificates";
 import { Achievers } from "@/components/main-page/achievers";
 import { Milestone } from "@/components/main-page/milestone";
+import { MediaDocument } from "@/lib/sanity/types";
+import { sanityClient } from "@/lib/sanity/client";
+import { mediaQuery } from "@/lib/sanity/queries";
+import { UpcomingCoursesSection } from "@/components/main-page/upcoming-courses";
 
-const HomePage = () => {
+export async function getAllMedia(): Promise<MediaDocument | null> {
+  const data = await sanityClient.fetch<MediaDocument>(mediaQuery);
+  return data || null;
+}
+
+const HomePage = async () => {
+  const media = await getAllMedia();
+
   return (
     <div>
-      <Hero />
+      <Hero heroImage={media?.heroImage} />
+      <UpcomingCoursesSection
+        upcomingCoursesImages={media?.upcomingCoursesImages}
+      />
       <CoursesSection />
       <Milestone />
-      <FounderAndCEO />
-      <Instructors />
-      <WhyUPIND />
-      <Testimonials />
-      <Certificates />
-      <Achievers />
+      <FounderAndCEO ceo={media?.ceo} />
+      <Instructors instructorImages={media?.instructorImages} />
+      <WhyUPIND whyUsImages={media?.whyUsImages} />
+      <Testimonials testimonialVideos={media?.testimonialVideos} />
+      <Certificates certificateImages={media?.certificateImages} />
+      <Achievers achieversImages={media?.achieversImages} />
     </div>
   );
 };

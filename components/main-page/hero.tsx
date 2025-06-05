@@ -1,22 +1,13 @@
 import Image from "next/image";
 
-import { sanityClient } from "@/lib/sanity/client";
-import { heroImageQuery } from "@/lib/sanity/queries";
-import { urlFor } from "@/lib/sanity/utils";
 import { MediaDocument } from "@/lib/sanity/types";
+import { urlFor } from "@/lib/sanity/utils";
 
-export async function getHeroImage(): Promise<
-  MediaDocument["heroImage"] | null
-> {
-  const data = await sanityClient.fetch<Pick<MediaDocument, "heroImage">>(
-    heroImageQuery
-  );
-  return data?.heroImage || null;
-}
-
-export const Hero = async () => {
-  const heroImage = await getHeroImage();
-
+export const Hero = async ({
+  heroImage,
+}: {
+  heroImage?: MediaDocument["heroImage"];
+}) => {
   return (
     <div className="relative overflow-hidden rounded-xl p-2">
       <Image
