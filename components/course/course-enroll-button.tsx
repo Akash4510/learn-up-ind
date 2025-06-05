@@ -46,9 +46,9 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
           if (error) {
             toast.error(error.message);
 
-            if (error.redirectTo) {
-              router.push(error.redirectTo);
-            }
+            // if (error.redirectTo) {
+            //   router.push(error.redirectTo);
+            // }
           }
           if (success) {
             const { order, metadata } = success;

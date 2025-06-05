@@ -31,14 +31,14 @@ export const createOrder = async ({ courseId }: { courseId: string }) => {
     };
   }
 
-  if (!user.kyc) {
-    return {
-      error: {
-        redirectTo: "/dashboard/account/kyc",
-        message: "Please complete your KYC to purchase a course",
-      },
-    };
-  }
+  // if (!user.kyc) {
+  //   return {
+  //     error: {
+  //       redirectTo: "/dashboard/account/kyc",
+  //       message: "Please complete your KYC to purchase a course",
+  //     },
+  //   };
+  // }
 
   const course = await db.course.findUnique({
     where: {
