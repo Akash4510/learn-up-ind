@@ -17,19 +17,18 @@ const AboutPage = async () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-12">
-      <div className="relative overflow-hidden">
+      <div className="relative max-h-[300px] overflow-hidden">
         <Image
           src={urlFor(content.image).url()}
           alt={content.image.alt || "About us"}
-          fill
-          className="object-cover"
+          width={1000}
+          height={300}
         />
       </div>
 
       <div>
         <div className="p-4 py-6 mb-10 space-y-4">
           <h1 className="text-3xl md:text-4xl">{content.title}</h1>
-
           <div className="space-y-1.5">{content.aboutText}</div>
         </div>
       </div>
