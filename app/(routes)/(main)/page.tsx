@@ -9,33 +9,33 @@ import { Testimonials } from "@/components/main-page/testimonials";
 import { Certificates } from "@/components/main-page/certificates";
 import { Achievers } from "@/components/main-page/achievers";
 import { Milestone } from "@/components/main-page/milestone";
-import { MediaDocument } from "@/lib/sanity/types";
+import { HomePageContent } from "@/lib/sanity/types";
 import { sanityClient } from "@/lib/sanity/client";
-import { mediaQuery } from "@/lib/sanity/queries";
+import { homePageQuery } from "@/lib/sanity/queries";
 import { UpcomingCoursesSection } from "@/components/main-page/upcoming-courses";
 
-export async function getAllMedia(): Promise<MediaDocument | null> {
-  const data = await sanityClient.fetch<MediaDocument>(mediaQuery);
-  return data || null;
+async function getHomePageContent() {
+  const homePageData: HomePageContent = await sanityClient.fetch(homePageQuery);
+  return homePageData;
 }
 
 const HomePage = async () => {
-  const media = await getAllMedia();
+  const homePageContent = await getHomePageContent();
 
   return (
     <div>
-      <Hero heroImage={media?.heroImage} />
+      <Hero content={homePageContent.heroSection} />
       <UpcomingCoursesSection
-        upcomingCoursesImages={media?.upcomingCoursesImages}
+        content={homePageContent.upcomingCoursesSection}
       />
-      <CoursesSection />
-      <Milestone />
-      <FounderAndCEO ceo={media?.ceo} />
-      <Instructors instructorImages={media?.instructorImages} />
-      <WhyUPIND whyUsImages={media?.whyUsImages} />
-      <Testimonials testimonialVideos={media?.testimonialVideos} />
-      <Certificates certificateImages={media?.certificateImages} />
-      <Achievers achieversImages={media?.achieversImages} />
+      <CoursesSection content={homePageContent.exploreCoursesSection} />
+      <Milestone content={homePageContent.milestonesSection} />
+      <FounderAndCEO content={homePageContent.founderSection} />
+      <Instructors content={homePageContent.instructorsSection} />
+      <WhyUPIND content={homePageContent.whyChooseUsSection} />
+      <Testimonials content={homePageContent.testimonialsSection} />
+      <Certificates content={homePageContent.certificatesSection} />
+      <Achievers content={homePageContent.achieversSection} />
     </div>
   );
 };

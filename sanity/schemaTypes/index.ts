@@ -1,3 +1,3 @@
-import media from './media'
+import homePage from './homePage'
 
-export const schemaTypes = [media]
+export const schemaTypes = [homePage]

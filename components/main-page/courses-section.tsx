@@ -6,8 +6,13 @@ import { CourseCard } from "@/components/course-card";
 import { TitleBlock } from "@/components/title-block";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+import { HomePageContent } from "@/lib/sanity/types";
 
-export const CoursesSection = async () => {
+export const CoursesSection = async ({
+  content,
+}: {
+  content: HomePageContent["exploreCoursesSection"];
+}) => {
   const publishedCourses = await getCourses({
     isPublished: true,
     page: 1,
@@ -15,13 +20,11 @@ export const CoursesSection = async () => {
   });
 
   return (
-    <div className="space-y-10 my-10">
+    <div className="space-y-10 my-10 md:my-20">
       <div className="lg:text-center">
         <TitleBlock
-          title="Explore Our Courses"
-          subtitle="Accelerate your digital journey with our featured online course,
-          designed to empower you with the latest tools and strategies for
-          sustainable growth"
+          title={content.sectionTitle}
+          subtitle={content.sectionDescription}
         />
       </div>
 

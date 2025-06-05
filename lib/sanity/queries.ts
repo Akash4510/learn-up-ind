@@ -1,159 +1,138 @@
-export const mediaQuery = `*[_type == "media"][0]{
-  // Single Images
-  heroImage {
-    asset->{
-      _id,
-      url,
-      metadata {
-        dimensions {
-          width,
-          height
-        }
-      }
-    },
-    alt
-  },
-  aboutImage {
-    asset->{
-      _id,
-      url,
-      metadata {
-        dimensions {
-          width,
-          height
-        }
-      }
-    },
-    alt
-  },
-  ceo {
-    asset->{
-      _id,
-      url,
-      metadata {
-        dimensions {
-          width,
-          height
-        }
-      }
-    },
-    alt,
-    name,
-    about
-  },
-  
-  // Array Fields
-  certificateImages[] {
-    asset->{
-      _id,
-      url,
-      metadata {
-        dimensions {
-          width,
-          height
-        }
-      }
-    },
-    alt,
-    title
-  },
-  
-  instructorImages[] {
-    asset->{
-      _id,
-      url,
-      metadata {
-        dimensions {
-          width,
-          height
-        }
-      }
-    },
-    alt,
-    name,
-    role
-  },
-  
-  upcomingCoursesImages[] {
-    asset->{
-      _id,
-      url,
-      metadata {
-        dimensions {
-          width,
-          height
-        }
-      }
-    },
-    alt,
-    title,
-    description
-  },
-  
-  testimonialVideos[] {
-    "asset": asset->,
-    description,
-    thumbnail {
+export const homePageQuery = `*[_type == "homePage"][0] {
+  heroSection {
+    image {
       asset->{
         _id,
         url,
         metadata {
-          dimensions {
-            width,
-            height
-          }
+          dimensions
         }
-      }
+      },
+      alt
+    },
+    title,
+    description
+  },
+  upcomingCoursesSection {
+    sectionTitle,
+    sectionDescription,
+    courses[] {
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        },
+        alt
+      },
+      title,
+      description
     }
   },
-  
-  whyUsImages[] {
-    asset->{
-      _id,
-      url,
-      metadata {
-        dimensions {
-          width,
-          height
-        }
-      }
-    },
-    alt,
-    title,
-    description
+  exploreCoursesSection {
+    sectionTitle,
+    sectionDescription
   },
-  
-  achieversImages[] {
-    asset->{
-      _id,
-      url,
-      metadata {
-        dimensions {
-          width,
-          height
-        }
-      }
-    },
-    alt,
+  milestonesSection {
+    sectionText,
+    milestones[] {
+      title,
+      subtitle
+    }
+  },
+  founderSection {
     name,
-    achievement
-  },
-  
-  trainingVideos[] {
-    level,
-    videoUrl,
     description,
-    thumbnail {
+    designation,
+    image {
       asset->{
         _id,
         url,
         metadata {
-          dimensions {
-            width,
-            height
-          }
+          dimensions
         }
-      }
+      },
+      alt
+    }
+  },
+  instructorsSection {
+    sectionTitle,
+    sectionDescription,
+    instructors[] {
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        },
+        alt
+      },
+      name,
+      description
+    }
+  },
+  whyChooseUsSection {
+    sectionTitle,
+    sectionDescription,
+    reasons[] {
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        },
+        alt
+      },
+      title,
+      description
+    }
+  },
+  testimonialsSection {
+    sectionTitle,
+    sectionDescription,
+    testimonials[] {
+      videoUrl,
+      name,
+      description,
+      rating
+    }
+  },
+  certificatesSection {
+    sectionTitle,
+    sectionDescription,
+    certificateImages[] {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions
+        }
+      },
+      alt
+    }
+  },
+  achieversSection {
+    sectionTitle,
+    sectionDescription,
+    achievers[] {
+      image {
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions
+          }
+        },
+        alt
+      },
+      name,
+      comment
     }
   }
 }`;

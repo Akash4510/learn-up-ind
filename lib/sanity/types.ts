@@ -1,72 +1,112 @@
-// Base Image Type
-export interface SanityImage {
-  asset: {
-    _id: string;
-    url: string;
-    metadata: {
-      dimensions: {
-        width: number;
-        height: number;
+// types/homePage.d.ts
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
+export interface HomePageContent {
+  heroSection: {
+    image: {
+      asset: SanityImageSource;
+      alt: string;
+    };
+    title: string;
+    description: string;
+  };
+  upcomingCoursesSection: {
+    sectionTitle: string;
+    sectionDescription: string;
+    courses: {
+      image: {
+        asset: SanityImageSource;
+        alt: string;
       };
+      title: string;
+      description: string;
+    }[];
+  };
+  exploreCoursesSection: {
+    sectionTitle: string;
+    sectionDescription: string;
+  };
+  milestonesSection: {
+    sectionText: string;
+    milestones: {
+      title: string;
+      subtitle: string;
+    }[];
+  };
+  founderSection: {
+    name: string;
+    description: string;
+    designation: string;
+    image: {
+      asset: SanityImageSource;
+      alt?: string;
     };
   };
-  alt?: string;
-}
-
-// Extended Types for specific fields
-export interface CertificateImage extends SanityImage {
-  title?: string;
-}
-
-export interface InstructorImage extends SanityImage {
-  name?: string;
-  role?: string;
-}
-
-export interface upcomingCoursesImage extends SanityImage {
-  title?: string;
-  description?: string;
-}
-
-export interface Ceo extends SanityImage {
-  name?: string;
-  about?: string;
-}
-
-export interface WhyUsImage extends SanityImage {
-  title?: string;
-  description?: string;
-}
-
-export interface AchieversImage extends SanityImage {
-  name?: string;
-  achievement?: string;
-}
-
-export interface TrainingVideo {
-  level: "beginner" | "intermediate" | "advanced";
-  videoUrl: string;
-  thumbnail: SanityImage;
-  description?: string;
-}
-
-export interface TestimonialVideo {
-  description?: string;
-  thumbnail: SanityImage;
-  asset?: {
-    url: string;
-    // Add other asset properties if needed
+  instructorsSection: {
+    sectionTitle: string;
+    sectionDescription: string;
+    instructors: {
+      image: {
+        asset: SanityImageSource;
+        alt: string;
+      };
+      name: string;
+      description: string;
+    }[];
+  };
+  whyChooseUsSection: {
+    sectionTitle: string;
+    sectionDescription: string;
+    reasons: {
+      image: {
+        asset: SanityImageSource;
+        alt: string;
+      };
+      title: string;
+      description: string;
+    }[];
+  };
+  testimonialsSection: {
+    sectionTitle: string;
+    sectionDescription: string;
+    testimonials: {
+      videoUrl: string;
+      name: string;
+      description: string;
+      rating?: number;
+    }[];
+  };
+  certificatesSection: {
+    sectionTitle: string;
+    sectionDescription: string;
+    certificateImages: {
+      asset: SanityImageSource;
+      alt: string;
+    }[];
+  };
+  achieversSection: {
+    sectionTitle: string;
+    sectionDescription: string;
+    achievers: {
+      image: {
+        asset: SanityImageSource;
+        alt: string;
+      };
+      name: string;
+      comment: string;
+    }[];
   };
 }
-export interface MediaDocument {
-  heroImage: SanityImage;
-  aboutImage: SanityImage;
-  ceo: Ceo;
-  certificateImages: CertificateImage[];
-  instructorImages: InstructorImage[];
-  upcomingCoursesImages: upcomingCoursesImage[];
-  testimonialVideos: TestimonialVideo[];
-  whyUsImages: WhyUsImage[];
-  achieversImages: AchieversImage[];
-  trainingVideos: TrainingVideo[];
+
+// Image metadata types
+export interface ImageMetadata {
+  _id: string;
+  url: string;
+  metadata: {
+    dimensions: {
+      width: number;
+      height: number;
+      aspectRatio: number;
+    };
+  };
 }

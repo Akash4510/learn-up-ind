@@ -1,19 +1,22 @@
 import { TitleBlock } from "@/components/title-block";
-import { MediaDocument } from "@/lib/sanity/types";
+import { HomePageContent } from "@/lib/sanity/types";
 
 export const Testimonials = ({
-  testimonialVideos,
+  content,
 }: {
-  testimonialVideos?: MediaDocument["testimonialVideos"];
+  content: HomePageContent["testimonialsSection"];
 }) => {
   return (
     <div className="my-10 lg:mt-20 py-4">
       <div className="lg:text-center">
-        <TitleBlock title="Testimonials" subtitle="What they say about us" />
+        <TitleBlock
+          title={content.sectionTitle}
+          subtitle={content.sectionDescription}
+        />
       </div>
 
       <div className="flex items-center justify-center gap-6">
-        {testimonialVideos?.map((testimonial, idx) => (
+        {content.testimonials?.map((testimonial, idx) => (
           <div
             key={idx}
             className="relative m-4 aspect-square w-[400px] rounded-md bg-accent "

@@ -1,34 +1,40 @@
 import Image from "next/image";
 
 import { TitleBlock } from "@/components/title-block";
-import { MediaDocument } from "@/lib/sanity/types";
+import { HomePageContent } from "@/lib/sanity/types";
 import { urlFor } from "@/lib/sanity/utils";
 
 export const Instructors = ({
-  instructorImages,
+  content,
 }: {
-  instructorImages?: MediaDocument["instructorImages"];
+  content: HomePageContent["instructorsSection"];
 }) => {
   return (
     <div className="my-10 lg:mt-20 py-4">
       <div className="lg:text-center space-y-4">
         <TitleBlock
-          title="Our Instructors"
-          subtitle="Accelerate your digital journey with our featured online course, designed to empower you with the latest tools and strategies for sustainable growth"
+          title={content.sectionTitle}
+          subtitle={content.sectionDescription}
         />
 
-        <div className="flex items-center justify-center gap-6">
-          {instructorImages?.map((insImg, idx) => (
-            <div
-              key={idx}
-              className="relative m-4 aspect-square w-[400px] rounded-md bg-accent "
-            >
-              <Image
-                src={urlFor(insImg).url()}
-                alt={insImg.alt || "instructor"}
-                className="rounded-md"
-                fill
-              />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:px-2 pt-8">
+          {content.instructors?.map((instructor, idx) => (
+            <div key={idx} className="text-center space-y-4">
+              <div className="relative aspect-square w-full rounded-md bg-accent">
+                <Image
+                  src={urlFor(instructor.image).url()}
+                  alt={instructor.image.alt || "instructor"}
+                  className="rounded-md object-cover"
+                  fill
+                />
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-lg">{instructor.name}</h3>
+                <p className="text-muted-foreground">
+                  {instructor.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
