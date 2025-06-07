@@ -1,9 +1,11 @@
 "use server";
 
-import { auth } from "@/auth";
-import { db } from "@/lib/prisma";
-import { PAYOUT_STATUS, USER_ROLE } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { PAYOUT_STATUS, USER_ROLE } from "@prisma/client";
+
+import { auth } from "@/auth";
+import { sendSuccessFullWithdrawlMail } from "@/lib/mail";
+import { db } from "@/lib/prisma";
 
 export const updatePayout = async (
   payoutId: string,
@@ -48,11 +50,18 @@ export const updatePayout = async (
         status: PAYOUT_STATUS.COMPLETED,
         transactionId,
         payoutDate: new Date(),
+        comment,
       },
     });
 
     revalidatePath("/studio/payouts");
     revalidatePath("/dashboard/payout");
+
+    try {
+      sendSuccessFullWithdrawlMail(user.email as string, payout);
+    } catch (err) {
+      console.log("Error sending successfull withdrawl mail", err);
+    }
 
     return {
       success: {
@@ -68,4 +77,4 @@ export const updatePayout = async (
       },
     };
   }
-}; 
+};

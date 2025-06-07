@@ -114,10 +114,14 @@ export const CourseEnrollButton = ({ course }: CourseEnrollButtonProps) => {
                       },
                     };
 
-                    sendPurchaseInvoiceEmail(
-                      metadata.user.email as string,
-                      invoiceDetails
-                    );
+                    try {
+                      sendPurchaseInvoiceEmail(
+                        metadata.user.email as string,
+                        invoiceDetails
+                      );
+                    } catch (err) {
+                      console.log("Error sending invoice mail", err);
+                    }
 
                     // Refresh the page
                     router.refresh();

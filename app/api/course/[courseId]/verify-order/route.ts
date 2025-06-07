@@ -4,6 +4,7 @@ import { Referral } from "@prisma/client";
 
 import { db } from "@/lib/prisma";
 import { getReferralCodeFromCookies } from "@/lib/referral";
+import { sendSuccessFullReferrallMail } from "@/lib/mail";
 
 const generatedSignature = (
   razorpayOrderId: string,
@@ -68,6 +69,9 @@ export async function POST(
   if (referralCode) {
     const affiliate = await db.affiliate.findUnique({
       where: { referralCode },
+      include: {
+        user: true,
+      },
     });
 
     if (!affiliate) {
@@ -96,7 +100,28 @@ export async function POST(
             totalEarnings: { increment: commissionEarned },
             pendingPayout: { increment: commissionEarned },
           },
+          include: {
+            user: true,
+          },
         });
+
+        try {
+          const referredUser = await db.user.findUnique({
+            where: { id: referral.referredUserId },
+          });
+
+          const referralWithReferredUser = {
+            ...referral,
+            referredUser,
+          };
+
+          sendSuccessFullReferrallMail(
+            affiliate.user.email as string,
+            referralWithReferredUser
+          );
+        } catch (err) {
+          console.log("Error sending referral success mail", err);
+        }
       } catch (error) {
         console.log("Error processing referral: ", error);
       }

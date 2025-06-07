@@ -60,8 +60,6 @@ const CahpterPage = async ({ params }: CahpterPageProps) => {
       )}
 
       <div className="flex flex-col max-w-4xl mx-auto pb-20">
-        <div className="p-4"></div>
-
         <div>
           <div className="p-4 flex flex-col items-start justify-between gap-2">
             <h2 className="text-2xl font-semibold mb-2">{chapter.title}</h2>
@@ -87,7 +85,7 @@ const CahpterPage = async ({ params }: CahpterPageProps) => {
                     href={attachment.url}
                     target="_blank"
                     key={attachment.id}
-                    className="bg-accent p-3 rounded-md border border-primary/40 flex items-center justify-between gap-2"
+                    className="bg-accent p-3 rounded-md border border-primary/40 flex items-center justify-between gap-2 overflow-hidden"
                   >
                     <div className="flex items-center gap-2">
                       <File className="size-5 flex-shrink-0" />

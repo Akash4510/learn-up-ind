@@ -1,9 +1,12 @@
 import { Resend } from "resend";
+import { Payout, Referral, User } from "@prisma/client";
 
 import { VerifyEmailTemplate } from "@/email-templates/verify-email-template";
 import { ResetPasswordTemplate } from "@/email-templates/reset-password-template";
 import { InvoiceDetails } from "@/types/invoice";
 import { InvoiceTemplate } from "@/email-templates/invoice-template";
+import { WithdrawlSuccessTemplate } from "@/email-templates/withdrawl-success-template";
+import { ReferralSuccessTemplate } from "@/email-templates/referral-success-template";
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
@@ -23,28 +26,48 @@ export const sendVerificationEmail = async (email: string, token: string) => {
 export const sendPasswordResetEmail = async (email: string, token: string) => {
   const resetLink = `${domain}/auth/new-password?token=${token}`;
 
-  console.log("resetLink - sending reset mail", resetLink);
-
-  const res = await resend.emails.send({
+  await resend.emails.send({
     from: "LearnUp IND <onboarding@resend.dev>",
     to: [email],
     subject: "Reset your password",
     react: ResetPasswordTemplate({ resetLink }),
   });
-
-  console.log("res", res);
 };
 
 export const sendInvoiceEmail = async (
   email: string,
   invoiceDetails: InvoiceDetails
 ) => {
-  const res = await resend.emails.send({
+  await resend.emails.send({
     from: "LearnUp IND <onboarding@resend.dev>",
     to: [email],
     subject: `Invoice for Your Purchase (Order #${invoiceDetails.orderId}) - Payment Confirmation`,
     react: InvoiceTemplate({ ...invoiceDetails }),
   });
+};
 
-  console.log("res", res);
+export const sendSuccessFullReferrallMail = async (
+  email: string,
+  referralWithRefferedUser: Referral & {
+    referredUser: User | null;
+  }
+) => {
+  await resend.emails.send({
+    from: "LearnUp IND <onboarding@resend.dev>",
+    to: [email],
+    subject: `Referral Successfull`,
+    react: ReferralSuccessTemplate({ ...referralWithRefferedUser }),
+  });
+};
+
+export const sendSuccessFullWithdrawlMail = async (
+  email: string,
+  payout: Payout
+) => {
+  await resend.emails.send({
+    from: "LearnUp IND <onboarding@resend.dev>",
+    to: [email],
+    subject: `Withdrawl Successfull`,
+    react: WithdrawlSuccessTemplate({ ...payout }),
+  });
 };

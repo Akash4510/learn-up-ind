@@ -209,6 +209,7 @@ model Payout {
   affiliateId String        @db.ObjectId
   amount      Float
   status      PAYOUT_STATUS @default(PENDING)
+  comment     String?
 
   payoutDate    DateTime?
   transactionId String?

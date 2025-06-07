@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import { getCourse } from "@/actions/course";
 import { getProgress } from "@/actions/course/get-progress";
 import { CourseSidebar } from "@/components/course/course-sidebar";
+import { CourseNavbar } from "@/components/course/course-navbar";
 
 interface CourseLayoutProps {
   children: ReactNode;
@@ -32,6 +33,10 @@ const CourseLayout = async ({ children, params }: CourseLayoutProps) => {
 
   return (
     <div className="h-screen">
+      <div className="h-[69px] md:pl-80 fixed inset-y-0 w-full z-100">
+        <CourseNavbar course={course} progressCount={progressCount} />
+      </div>
+
       <div className="flex flex-row flex-1 h-screen">
         <div className="hidden md:flex h-full w-80 flex-col fixed inset-y-0">
           <CourseSidebar
@@ -43,7 +48,7 @@ const CourseLayout = async ({ children, params }: CourseLayoutProps) => {
 
         <div className="mt-[69px] w-full h-[calc(100vh-69px)] md:pl-40 overflow-y-auto">
           <div className="h-full flex flex-col">
-            <main className="h-full">{children}</main>
+            <main className="h-full pt-4">{children}</main>
           </div>
         </div>
       </div>
