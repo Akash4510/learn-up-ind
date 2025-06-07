@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { db } from "@/lib/prisma";
 import { TitleBlock } from "@/components/title-block";
-import { UserRoleCard } from "./_components/user-role-card";
+import { UsersTable } from "./_components/users-table";
 
 const UserRoleManagementPage = async () => {
   const session = await auth();
@@ -25,11 +25,7 @@ const UserRoleManagementPage = async () => {
         subtitle="Be cautious while managing user roles! This action might be dangerous."
       />
 
-      <div className="space-y-2">
-        {users.map((user) => (
-          <UserRoleCard key={user.id} user={user} />
-        ))}
-      </div>
+      <UsersTable users={users} />
     </div>
   );
 };
