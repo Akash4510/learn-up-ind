@@ -7,6 +7,7 @@ import { CourseContentPreview } from "@/components/course/course-content-preview
 import { AppSidebar } from "@/components/app-sidebar";
 import { Navbar } from "@/components/navbar";
 import { UserAvatar } from "@/components/user-avatar";
+import { CourseVideoPreview } from "@/components/course/course-video-preview";
 
 interface CoursePageProps {
   params: Promise<{
@@ -50,6 +51,10 @@ const CoursePage = async ({ params, searchParams }: CoursePageProps) => {
 
                 <p className="text-pretty">{course.description}</p>
               </div>
+            </div>
+
+            <div className="lg:col-span-3">
+              <CourseVideoPreview course={course} />
             </div>
 
             <div className="lg:col-span-2">
