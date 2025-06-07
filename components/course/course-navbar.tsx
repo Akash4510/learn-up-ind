@@ -10,7 +10,7 @@ interface CourseNavbarProps {
   progressCount: number;
 }
 
-export const CourseNavbar = ({ course, progressCount }: CourseNavbarProps) => {
+export const CourseNavbar = ({}: CourseNavbarProps) => {
   return (
     <div className="p-4 border-b h-full flex items-center shadow-sm">
       <div className="flex items-center gap-2 justify-end w-full">
