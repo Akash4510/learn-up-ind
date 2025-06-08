@@ -45,14 +45,17 @@ import { dashboardMenus, studioMenus } from "@/constants/sidebar-menus";
 import { mainMenus } from "@/constants/nav-menus";
 import { useAuth } from "@/hooks/use-auth";
 import { logout } from "@/actions/auth";
+import { SidebarLink } from "./sidebar-link";
 
 export const AppSidebar = () => {
   const pathname = usePathname();
   const { user } = useAuth();
 
   // Determine which menu to show based on authentication status
-  const menuGroups = user 
-    ? (pathname.startsWith("/dashboard") ? dashboardMenus : studioMenus)
+  const menuGroups = user
+    ? pathname.startsWith("/dashboard")
+      ? dashboardMenus
+      : studioMenus
     : [];
 
   return (
@@ -102,10 +105,10 @@ export const AppSidebar = () => {
                               {item.items?.map((subItem) => (
                                 <SidebarMenuSubItem key={subItem.label}>
                                   <SidebarMenuSubButton asChild>
-                                    <Link href={subItem.url}>
+                                    <SidebarLink href={subItem.url}>
                                       {subItem.icon && <subItem.icon />}
                                       <span>{subItem.label}</span>
-                                    </Link>
+                                    </SidebarLink>
                                   </SidebarMenuSubButton>
                                 </SidebarMenuSubItem>
                               ))}
@@ -117,10 +120,10 @@ export const AppSidebar = () => {
                       // Render non-collapsible menu
                       <SidebarMenuItem>
                         <SidebarMenuButton asChild tooltip={item.label}>
-                          <Link href={item.url}>
+                          <SidebarLink href={item.url}>
                             {item.icon && <item.icon />}
                             <span>{item.label}</span>
-                          </Link>
+                          </SidebarLink>
                         </SidebarMenuButton>
                       </SidebarMenuItem>
                     )}
@@ -137,10 +140,10 @@ export const AppSidebar = () => {
               {mainMenus.map((item) => (
                 <SidebarMenuItem key={item.label}>
                   <SidebarMenuButton asChild tooltip={item.label}>
-                    <Link href={item.href}>
+                    <SidebarLink href={item.href}>
                       <item.icon />
                       <span>{item.label}</span>
-                    </Link>
+                    </SidebarLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
