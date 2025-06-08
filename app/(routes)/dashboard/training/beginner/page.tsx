@@ -2,13 +2,24 @@ import React from "react";
 
 import { TitleBlock } from "@/components/title-block";
 import { VideoPlayer } from "@/components/video-player";
+import { TrainingContent } from "@/lib/sanity/types";
+import { sanityClient } from "@/lib/sanity/client";
+import { getTrainingQuery } from "@/lib/sanity/queries";
 
-const BeginnerTrainingPage = () => {
+async function getBeginnerTrainingContent() {
+  const beginnerTrainingContent: TrainingContent["beginnerTraining"] =
+    await sanityClient.fetch(getTrainingQuery("beginner"));
+  return beginnerTrainingContent;
+}
+
+const BeginnerTrainingPage = async () => {
+  const content = await getBeginnerTrainingContent();
+
   return (
     <div className="space-y-6">
       <TitleBlock
         title="Beginner Training"
-        subtitle="This training is well structured for beginners to learn"
+        subtitle={content.description}
         withSeparator
       />
 

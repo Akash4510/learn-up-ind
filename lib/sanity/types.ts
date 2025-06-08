@@ -107,6 +107,33 @@ export interface AboutPageContent {
   aboutText: string;
 }
 
+export interface TrainingContent {
+  beginnerTraining: {
+    description: string;
+    videoUrl: string;
+    thumbnail: {
+      asset: SanityImageSource;
+      alt: string;
+    };
+  };
+  intermediateTraining: {
+    description: string;
+    videoUrl: string;
+    thumbnail: {
+      asset: SanityImageSource;
+      alt: string;
+    };
+  };
+  advancedTraining: {
+    description: string;
+    videoUrl: string;
+    thumbnail: {
+      asset: SanityImageSource;
+      alt: string;
+    };
+  };
+}
+
 // Image metadata types
 export interface ImageMetadata {
   _id: string;

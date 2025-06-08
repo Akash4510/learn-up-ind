@@ -151,3 +151,22 @@ export const aboutPageQuery = `*[_type == "aboutPage"][0] {
   title,
   aboutText
 }`;
+
+type TrainingType = "beginner" | "intermediate" | "advanced";
+
+export function getTrainingQuery(trainingType: TrainingType): string {
+  return `*[_type == "training"][0].${trainingType}Training {
+    description,
+    videoUrl,
+    thumbnail {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions
+        }
+      },
+      alt
+    }
+  }`;
+}

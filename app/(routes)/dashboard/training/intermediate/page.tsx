@@ -2,18 +2,29 @@ import React from "react";
 
 import { TitleBlock } from "@/components/title-block";
 import { VideoPlayer } from "@/components/video-player";
+import { TrainingContent } from "@/lib/sanity/types";
+import { sanityClient } from "@/lib/sanity/client";
+import { getTrainingQuery } from "@/lib/sanity/queries";
 
-const IntermediateTrainingPage = () => {
+async function getIntermediateTrainingContent() {
+  const intermediateTrainingContent: TrainingContent["intermediateTraining"] =
+    await sanityClient.fetch(getTrainingQuery("intermediate"));
+  return intermediateTrainingContent;
+}
+
+const IntermediateTrainingPage = async () => {
+  const content = await getIntermediateTrainingContent();
+
   return (
     <div className="space-y-6">
       <TitleBlock
         title="Intermediate Training"
-        subtitle="This is intermediate training for the ones who completed the beginner training"
+        subtitle={content.description}
         withSeparator
       />
 
       <div className="max-w-[690px] rounded-lg bg-accent p-2">
-        <VideoPlayer videoUrl="https://youtu.be/X61V49uCNOI?si=6kVAa1MCH2vDjwuh" />
+        <VideoPlayer videoUrl={content.videoUrl} />
       </div>
     </div>
   );

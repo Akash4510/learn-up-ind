@@ -1,17 +1,28 @@
 import { TitleBlock } from "@/components/title-block";
 import { VideoPlayer } from "@/components/video-player";
+import { TrainingContent } from "@/lib/sanity/types";
+import { sanityClient } from "@/lib/sanity/client";
+import { getTrainingQuery } from "@/lib/sanity/queries";
 
-const AdvancedTrainingPage = () => {
+async function getAdvancedTrainingContent() {
+  const advancedTrainingContent: TrainingContent["advancedTraining"] =
+    await sanityClient.fetch(getTrainingQuery("advanced"));
+  return advancedTrainingContent;
+}
+
+const AdvancedTrainingPage = async () => {
+  const content = await getAdvancedTrainingContent();
+
   return (
     <div className="space-y-6">
       <TitleBlock
         title="Advanced Training"
-        subtitle="This is advanced trainings for the ones who completed the intermediate training"
+        subtitle={content.description}
         withSeparator
       />
 
       <div className="max-w-[690px] rounded-lg bg-accent p-2">
-        <VideoPlayer videoUrl="https://youtu.be/X61V49uCNOI?si=6kVAa1MCH2vDjwuh" />
+        <VideoPlayer videoUrl={content.videoUrl} />
       </div>
     </div>
   );
