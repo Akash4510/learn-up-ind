@@ -13,6 +13,7 @@ export const getCourses = async (
     creatorId,
     includeSelfCreated = false,
     includeProgress = false,
+    excludePurchasedCourses = false,
     includePurchasesData = true,
     page,
     pageSize,
@@ -29,30 +30,51 @@ export const getCourses = async (
       categoryId,
       creatorId,
       // Add a condition to filter courses based on purchases or creator
-      OR: userId
-        ? includeSelfCreated
-          ? [
-              {
-                purchases: {
-                  some: {
-                    userId, // Only include courses purchased by the user
-                  },
+      // Handle purchased courses exclusion
+      ...(userId && excludePurchasedCourses
+        ? {
+            NOT: {
+              purchases: {
+                some: {
+                  userId,
                 },
               },
-              {
-                creatorId: userId, // Include courses created by the user
-              },
-            ]
-          : [
-              {
-                purchases: {
-                  some: {
-                    userId, // Only include courses purchased by the user
+            },
+          }
+        : {}),
+      // Handle self-created courses inclusion
+      ...(userId && includeSelfCreated
+        ? {
+            OR: [
+              { creatorId: userId },
+              // Only include purchased if not excluding them
+              ...(excludePurchasedCourses
+                ? []
+                : [
+                    {
+                      purchases: {
+                        some: {
+                          userId,
+                        },
+                      },
+                    },
+                  ]),
+            ],
+          }
+        : userId
+        ? {
+            // If not including self-created, only show purchased (unless excluding)
+            ...(excludePurchasedCourses
+              ? {}
+              : {
+                  purchases: {
+                    some: {
+                      userId,
+                    },
                   },
-                },
-              },
-            ]
-        : undefined,
+                }),
+          }
+        : {}),
     },
     include: {
       category: true,

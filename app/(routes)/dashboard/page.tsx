@@ -35,7 +35,7 @@ const DashboardPage = async () => {
     <div className="flex flex-col lg:flex-row gap-6">
       <div className="flex flex-col justify-center items-center gap-5 lg:w-[400px] border rounded-md py-6 bg-gradient-to-bl from-card to-accent">
         <div>
-          <UserAvatar url={session.user.image} size={100} />
+          <UserAvatar url={session.user.image} size={120} />
         </div>
 
         <div className="text-center">
@@ -52,14 +52,14 @@ const DashboardPage = async () => {
             className="bg-gradient-to-bl from-sky-700 to-bg-card hover:scale-[102%] transition-all"
           />
           <AmountCard
-            title="Last Month's Earning"
-            amount={lastMonthEarnings}
-            className="bg-gradient-to-bl from-cyan-800 to-bg-card hover:scale-[102%] transition-all"
-          />
-          <AmountCard
             title="Last Week's Earning"
             amount={lastWeekEarnings}
             className="bg-gradient-to-bl from-secondary to-bg-card hover:scale-[102%] transition-all"
+          />
+          <AmountCard
+            title="Last Month's Earning"
+            amount={lastMonthEarnings}
+            className="bg-gradient-to-bl from-cyan-800 to-bg-card hover:scale-[102%] transition-all"
           />
           <AmountCard
             title="Total Earning"

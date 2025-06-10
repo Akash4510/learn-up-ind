@@ -34,6 +34,7 @@ export type GetCoursesOptions = {
   categoryId?: string;
   creatorId?: string;
   includeSelfCreated?: boolean;
+  excludePurchasedCourses?: boolean;
   includePurchasesData?: boolean;
   includeProgress?: boolean;
   page?: number;

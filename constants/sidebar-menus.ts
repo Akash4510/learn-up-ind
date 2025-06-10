@@ -13,20 +13,17 @@ import {
   Dumbbell,
   IdCard,
   CreditCard,
-  // Settings,
-  // Star,
   Folder,
   FileText,
-  // Video,
-  // LayoutDashboard,
-  // ClipboardCheck,
   ShieldCheck,
   CheckCircle,
+  ImageIcon,
 } from "lucide-react";
 
 type Menu = {
   label: string;
   url: string;
+  target?: string;
   icon: LucideIcon;
   isOpen?: boolean;
   isCollapsible?: boolean;
@@ -37,6 +34,7 @@ type SubMenu = {
   label: string;
   url: string;
   icon?: LucideIcon;
+  target?: string;
 };
 
 export type MenuGroup = {
@@ -161,6 +159,17 @@ export const studioMenus: MenuGroup[] = [
         label: "KYC Approvals",
         url: "/studio/kyc",
         icon: CheckCircle,
+      },
+    ],
+  },
+  {
+    groupLabel: "Media Management",
+    menus: [
+      {
+        label: "Edit Media",
+        url: "https://learnupind.sanity.studio/structure",
+        icon: ImageIcon,
+        target: "_blank",
       },
     ],
   },

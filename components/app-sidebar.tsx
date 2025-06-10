@@ -89,7 +89,7 @@ export const AppSidebar = () => {
                       <Collapsible asChild defaultOpen={item.isOpen}>
                         <SidebarMenuItem>
                           <SidebarMenuButton asChild tooltip={item.label}>
-                            <Link href={item.url}>
+                            <Link href={item.url} target={item.target}>
                               <item.icon />
                               <span>{item.label}</span>
                             </Link>
@@ -105,7 +105,10 @@ export const AppSidebar = () => {
                               {item.items?.map((subItem) => (
                                 <SidebarMenuSubItem key={subItem.label}>
                                   <SidebarMenuSubButton asChild>
-                                    <SidebarLink href={subItem.url}>
+                                    <SidebarLink
+                                      href={subItem.url}
+                                      target={subItem.target}
+                                    >
                                       {subItem.icon && <subItem.icon />}
                                       <span>{subItem.label}</span>
                                     </SidebarLink>
@@ -120,7 +123,7 @@ export const AppSidebar = () => {
                       // Render non-collapsible menu
                       <SidebarMenuItem>
                         <SidebarMenuButton asChild tooltip={item.label}>
-                          <SidebarLink href={item.url}>
+                          <SidebarLink href={item.url} target={item.target}>
                             {item.icon && <item.icon />}
                             <span>{item.label}</span>
                           </SidebarLink>
@@ -140,7 +143,7 @@ export const AppSidebar = () => {
               {mainMenus.map((item) => (
                 <SidebarMenuItem key={item.label}>
                   <SidebarMenuButton asChild tooltip={item.label}>
-                    <SidebarLink href={item.href}>
+                    <SidebarLink href={item.href} target={item.target}>
                       <item.icon />
                       <span>{item.label}</span>
                     </SidebarLink>

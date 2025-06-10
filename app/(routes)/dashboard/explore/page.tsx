@@ -1,10 +1,21 @@
+import { redirect } from "next/navigation";
+
+import { auth } from "@/auth";
 import { TitleBlock } from "@/components/title-block";
 import { CourseCard } from "@/components/course-card";
 import { getCourses } from "@/actions/course";
 
 const ExplorePage = async () => {
+  const session = await auth();
+
+  if (!session || !session.user) {
+    redirect("/");
+  }
+
   const courses = await getCourses({
     isPublished: true,
+    userId: session.user.id,
+    excludePurchasedCourses: true,
   });
 
   return (

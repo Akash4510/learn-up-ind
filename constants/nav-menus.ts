@@ -4,6 +4,7 @@ type Menu = {
   label: string;
   href: string;
   icon: LucideIcon;
+  target?: string;
 };
 
 export const mainMenus: Menu[] = [
