@@ -170,3 +170,28 @@ export function getTrainingQuery(trainingType: TrainingType): string {
     }
   }`;
 }
+
+export const getCommunityLinksQuery = `*[_type == "communityLinks"][0] {
+  facebook,
+  twitter,
+  instagram,
+  linkedin,
+  youtube
+}`;
+
+export const getLiveOffersQuery = `*[_type == "liveOffers"][0] {
+  offers[] {
+    image {
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions
+        }
+      },
+      alt
+    },
+    title,
+    description
+  }
+}`;

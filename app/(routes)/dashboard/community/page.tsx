@@ -1,46 +1,46 @@
-import { TitleBlock } from "@/components/title-block";
-import {
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
-  Youtube,
-  Github,
-} from "lucide-react";
 import Link from "next/link";
+import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
 
-const CommunityPage = () => {
-  // Social links data
+import { TitleBlock } from "@/components/title-block";
+import { sanityClient } from "@/lib/sanity/client";
+import { CommunityLinks } from "@/lib/sanity/types";
+import { getCommunityLinksQuery } from "@/lib/sanity/queries";
+
+export async function getCommunityLinks(): Promise<CommunityLinks> {
+  return (
+    (await sanityClient.fetch<CommunityLinks>(getCommunityLinksQuery)) || {}
+  );
+}
+
+const CommunityPage = async () => {
+  const communityLinks = await getCommunityLinks();
+  console.log({ communityLinks });
+
   const socialLinks = [
     {
       name: "Facebook",
       icon: Facebook,
-      url: "/",
+      url: communityLinks.facebook,
     },
     {
       name: "Twitter",
       icon: Twitter,
-      url: "/",
+      url: communityLinks.twitter,
     },
     {
       name: "Instagram",
       icon: Instagram,
-      url: "/",
+      url: communityLinks.instagram,
     },
     {
       name: "LinkedIn",
       icon: Linkedin,
-      url: "/",
+      url: communityLinks.linkedin,
     },
     {
       name: "YouTube",
       icon: Youtube,
-      url: "/",
-    },
-    {
-      name: "GitHub",
-      icon: Github,
-      url: "/",
+      url: communityLinks.youtube,
     },
   ];
 
@@ -56,7 +56,7 @@ const CommunityPage = () => {
         {socialLinks.map((social, index) => (
           <Link
             key={index}
-            href={social.url}
+            href={social.url || ""}
             className="group p-6 border rounded-lg hover:border-primary transition-all duration-300 flex flex-col items-center justify-center space-y-3 text-center"
           >
             <div className="text-primary group-hover:text-primary-dark transition-all duration-300">

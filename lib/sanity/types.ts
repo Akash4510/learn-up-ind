@@ -134,6 +134,27 @@ export interface TrainingContent {
   };
 }
 
+export interface CommunityLinks {
+  facebook?: string;
+  twitter?: string;
+  instagram?: string;
+  linkedin?: string;
+  youtube?: string;
+}
+
+export interface LiveOfferItem {
+  image: {
+    asset: SanityImageSource;
+    alt: string;
+  };
+  title: string;
+  description: string;
+}
+
+export interface LiveOffers {
+  offers?: LiveOfferItem[];
+}
+
 // Image metadata types
 export interface ImageMetadata {
   _id: string;
