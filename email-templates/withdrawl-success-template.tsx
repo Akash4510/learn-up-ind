@@ -1,5 +1,7 @@
 import { Payout } from "@prisma/client";
 
+import { formatDateWithMonthName } from "@/lib/utils";
+
 export const WithdrawlSuccessTemplate = ({
   id,
   amount,
@@ -44,9 +46,13 @@ export const WithdrawlSuccessTemplate = ({
             </div>
             <div>
               <p className="text-sm text-gray-500">Processed On</p>
-              <p className="font-medium text-gray-800">
-                {payoutDate?.toDateString()}
-              </p>
+              {payoutDate ? (
+                <p className="font-medium text-gray-800">
+                  {formatDateWithMonthName(payoutDate)}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
             <div>
               <p className="text-sm text-gray-500">Payment Method</p>

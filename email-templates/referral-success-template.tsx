@@ -1,5 +1,7 @@
 import { Referral, User } from "@prisma/client";
 
+import { formatDateWithMonthName } from "@/lib/utils";
+
 export const ReferralSuccessTemplate = ({
   id,
   referredUser,
@@ -48,7 +50,7 @@ export const ReferralSuccessTemplate = ({
             <div>
               <p className="text-sm text-gray-500">Date</p>
               <p className="font-medium text-gray-800">
-                {createdAt.toDateString()}
+                {formatDateWithMonthName(createdAt)}
               </p>
             </div>
             <div>

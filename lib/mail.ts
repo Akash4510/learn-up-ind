@@ -7,10 +7,20 @@ import { InvoiceDetails } from "@/types/invoice";
 import { InvoiceTemplate } from "@/email-templates/invoice-template";
 import { WithdrawlSuccessTemplate } from "@/email-templates/withdrawl-success-template";
 import { ReferralSuccessTemplate } from "@/email-templates/referral-success-template";
+import { NewRegistrationTemplate } from "@/email-templates/new-registration";
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
 const domain = process.env.NEXT_PUBLIC_APP_URL!;
+
+export const sendRegistrationMail = async (user: User) => {
+  await resend.emails.send({
+    from: "LearnUp IND <onboarding@resend.dev>",
+    to: [user.email as string],
+    subject: "Registration succesfull",
+    react: NewRegistrationTemplate(user),
+  });
+};
 
 export const sendVerificationEmail = async (email: string, token: string) => {
   const confirmLink = `${domain}/auth/verify-email?token=${token}`;

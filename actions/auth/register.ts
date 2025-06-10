@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { RegisterSchema } from "@/schemas/auth";
 import { db } from "@/lib/prisma";
 import { generateVerificationToken } from "@/lib/tokens";
-import { sendVerificationEmail } from "@/lib/mail";
+import { sendRegistrationMail, sendVerificationEmail } from "@/lib/mail";
 import { generateUniqueUsername } from "@/lib/user";
 
 export const register = async (values: RegisterSchema) => {
@@ -56,6 +56,12 @@ export const register = async (values: RegisterSchema) => {
     verificationToken.identifier,
     verificationToken.token
   );
+
+  try {
+    sendRegistrationMail(newUser);
+  } catch (error) {
+    console.log("Error sending new registration mail", error);
+  }
 
   return {
     success: {

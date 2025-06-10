@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -21,6 +22,7 @@ import { AlertMessage } from "@/components/ui/alert-message";
 import { register } from "@/actions/auth";
 
 export const RegisterForm = () => {
+  const router = useRouter();
   const [success, setSuccess] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isPending, startTransition] = useTransition();
@@ -53,6 +55,8 @@ export const RegisterForm = () => {
           if (success) {
             setSuccess(success.message);
             form.reset();
+
+            router.push("/dashboard/explore");
           }
           if (error) {
             setError(error.message);
