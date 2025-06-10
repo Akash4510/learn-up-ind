@@ -21,7 +21,6 @@ async function getCommunityLinks(): Promise<CommunityLinks> {
 
 const CommunityPage = async () => {
   const communityLinks = await getCommunityLinks();
-  console.log({ communityLinks });
 
   const socialLinks = [
     {
