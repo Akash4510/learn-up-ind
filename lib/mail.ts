@@ -11,7 +11,7 @@ import { NewRegistrationTemplate } from "@/email-templates/new-registration";
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
-const domain = process.env.NEXT_PUBLIC_APP_URL!;
+const domain = process.env.NEXT_PUBLIC_HOME_URL!;
 
 export const sendRegistrationMail = async (user: User) => {
   await resend.emails.send({
