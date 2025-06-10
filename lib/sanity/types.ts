@@ -140,6 +140,7 @@ export interface CommunityLinks {
   instagram?: string;
   linkedin?: string;
   youtube?: string;
+  telegram?: string;
 }
 
 export interface LiveOfferItem {

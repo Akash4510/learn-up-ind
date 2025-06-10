@@ -176,7 +176,8 @@ export const getCommunityLinksQuery = `*[_type == "communityLinks"][0] {
   twitter,
   instagram,
   linkedin,
-  youtube
+  youtube,
+  telegram
 }`;
 
 export const getLiveOffersQuery = `*[_type == "liveOffers"][0] {

@@ -1,12 +1,19 @@
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Youtube,
+  MessageCircle,
+} from "lucide-react";
 
 import { TitleBlock } from "@/components/title-block";
 import { sanityClient } from "@/lib/sanity/client";
 import { CommunityLinks } from "@/lib/sanity/types";
 import { getCommunityLinksQuery } from "@/lib/sanity/queries";
 
-export async function getCommunityLinks(): Promise<CommunityLinks> {
+async function getCommunityLinks(): Promise<CommunityLinks> {
   return (
     (await sanityClient.fetch<CommunityLinks>(getCommunityLinksQuery)) || {}
   );
@@ -41,6 +48,11 @@ const CommunityPage = async () => {
       name: "YouTube",
       icon: Youtube,
       url: communityLinks.youtube,
+    },
+    {
+      name: "Telegram",
+      icon: MessageCircle,
+      url: communityLinks.telegram,
     },
   ];
 

@@ -36,5 +36,11 @@ export default defineType({
       type: 'url',
       validation: (rule: UrlRule) => rule.uri({scheme: ['http', 'https']}),
     }),
+    defineField({
+      name: 'telegram',
+      title: 'Telegram',
+      type: 'url',
+      validation: (rule: UrlRule) => rule.uri({scheme: ['http', 'https']}),
+    }),
   ],
 })

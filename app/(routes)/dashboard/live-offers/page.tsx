@@ -5,7 +5,7 @@ import { LiveOffers } from "@/lib/sanity/types";
 import { getLiveOffersQuery } from "@/lib/sanity/queries";
 import { urlFor } from "@/lib/sanity/utils";
 
-export async function getLiveOffers(): Promise<LiveOffers["offers"]> {
+async function getLiveOffers(): Promise<LiveOffers["offers"]> {
   const result = await sanityClient.fetch<LiveOffers>(getLiveOffersQuery);
   return result?.offers || [];
 }
