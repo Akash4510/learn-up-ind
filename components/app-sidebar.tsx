@@ -53,9 +53,9 @@ export const AppSidebar = () => {
 
   // Determine which menu to show based on authentication status
   const menuGroups = user
-    ? pathname.startsWith("/dashboard")
-      ? dashboardMenus
-      : studioMenus
+    ? pathname.startsWith("/studio")
+      ? studioMenus
+      : dashboardMenus
     : [];
 
   return (
