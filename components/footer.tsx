@@ -7,7 +7,7 @@ export const Footer = () => {
       <div className="w-[92%] mx-auto flex flex-col gap-12">
         <div className="flex justify-between gap-10 flex-wrap flex-col lg:flex-row">
           <div className="flex-1">
-            <h3 className="text-lg mb-2">© LearnUPIND 2024</h3>
+            <h3 className="text-lg mb-2">© LearnUPIND 2026</h3>
             <p className="text-sm text-muted-foreground">
               The ultimate platform where creators thrive and learners excel.
             </p>
@@ -74,10 +74,10 @@ export const Footer = () => {
               <div className="flex items-center gap-2">
                 <Mail className="size-4" />
                 <Link
-                  href="mailto:helplearnupind@gmail.com"
+                  href="mailto:support@learnupind.com"
                   className="text-muted-foreground hover:underline"
                 >
-                  helplearnupind@gmail.com
+                  support@learnupind.com
                 </Link>
               </div>
               <div className="flex items-center gap-2">
