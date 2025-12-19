@@ -7,17 +7,22 @@ interface VideoPlayerProps {
   videoUrl: string; // YouTube video URL
   width?: string | number; // Optional width of the video player
   height?: string | number; // Optional height of the video player
+  autoplay?: boolean;
+  showControls?: boolean;
 }
 
 export const VideoPlayer = ({
   videoUrl,
   width = "100%",
   height = "400px",
+  autoplay = false,
+  showControls = false,
 }: VideoPlayerProps) => {
   // Extract the video ID from the YouTube URL
   const getVideoId = (url: string): string | null => {
+    // This updated Regex now accounts for the /shorts/ path
     const regExp =
-      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/;
     const match = url.match(regExp);
 
     return match && match[2].length === 11 ? match[2] : null;
@@ -34,8 +39,8 @@ export const VideoPlayer = ({
     width: width,
     height: height,
     playerVars: {
-      autoplay: 0, // Autoplay disabled by default
-      controls: 1, // Show video controls
+      autoplay: !!autoplay,
+      controls: showControls,
       rel: 0, // Do not show related videos at the end
     },
   };

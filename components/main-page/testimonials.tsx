@@ -1,5 +1,7 @@
 import { TitleBlock } from "@/components/title-block";
 import { HomePageContent } from "@/lib/sanity/types";
+import { VideoPlayer } from "../video-player";
+import { AutoScroll } from "../auto-scroll";
 
 export const Testimonials = ({
   content,
@@ -7,7 +9,7 @@ export const Testimonials = ({
   content: HomePageContent["testimonialsSection"];
 }) => {
   return (
-    <div className="my-10 lg:mt-20 py-4">
+    <div className="my-10 lg:mt-20 py-4 space-y-8">
       <div className="lg:text-center">
         <TitleBlock
           title={content.sectionTitle}
@@ -15,16 +17,25 @@ export const Testimonials = ({
         />
       </div>
 
-      <div className="flex items-center justify-center gap-6">
-        {content.testimonials?.map((testimonial, idx) => (
-          <div
-            key={idx}
-            className="relative m-4 aspect-square w-[400px] rounded-md bg-accent "
-          >
-            {testimonial.description}
-          </div>
-        ))}
-      </div>
+      {content.testimonials.length ? (
+        <AutoScroll pauseDuration={4000} scrollDuration={600} infinite={true}>
+          {content.testimonials?.map((testimonial, idx) => {
+            return (
+              <div
+                key={idx}
+                className="relative shrink-0 inline-block snap-start mr-4 rounded-xl overflow-hidden bg-black shadow-lg border w-[280px] md:w-[320px]"
+              >
+                <VideoPlayer
+                  videoUrl={testimonial.videoUrl}
+                  showControls={false}
+                />
+              </div>
+            );
+          })}
+        </AutoScroll>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
