@@ -36,10 +36,10 @@ export const ContactFormTemplate = ({
         }}
       >
         <h1 style={{ color: "#ffffff", margin: 0, fontSize: "24px" }}>
-          New Inquiry Received
+          New Message Received
         </h1>
-        <p style={{ color: "#dbeafe", marginTop: "8px", fontSize: "14px" }}>
-          LearnUp Educational Platform
+        <p style={{ color: "#dbeafe", marginTop: "4px", fontSize: "14px" }}>
+          From Learn Up IND Contact Form
         </p>
       </div>
 
@@ -84,7 +84,6 @@ export const ContactFormTemplate = ({
               padding: "16px",
               backgroundColor: "#f3f4f6",
               borderRadius: "8px",
-              whiteSpace: "pre-wrap" as const,
               lineHeight: "1.6",
             }}
           >
