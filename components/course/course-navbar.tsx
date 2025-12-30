@@ -4,6 +4,7 @@ import { LayoutDashboard, LogOut } from "lucide-react";
 import { UserButton } from "@/components/auth/user-button";
 import { Button } from "@/components/ui/button";
 import { CourseWithProgress } from "@/types/course";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 interface CourseNavbarProps {
   course: CourseWithProgress;
@@ -12,7 +13,11 @@ interface CourseNavbarProps {
 
 export const CourseNavbar = ({}: CourseNavbarProps) => {
   return (
-    <div className="p-4 border-b h-full flex items-center shadow-sm">
+    <>
+      <div className="md:hidden pl-4">
+        <SidebarTrigger />
+      </div>
+
       <div className="flex items-center gap-2 justify-end w-full">
         <Button variant="accent" asChild>
           <Link href="/dashboard">
@@ -30,6 +35,6 @@ export const CourseNavbar = ({}: CourseNavbarProps) => {
 
         <UserButton />
       </div>
-    </div>
+    </>
   );
 };

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { USER_ROLE } from "@prisma/client";
+import { Clapperboard } from "lucide-react";
 
 import { auth } from "@/auth";
 import { AppSidebar } from "@/components/app-sidebar";
@@ -12,7 +13,6 @@ import {
 } from "@/components/ui/sidebar";
 import { AppBreadcrumb } from "@/components/app-breadcrumb";
 import { Button } from "@/components/ui/button";
-import { Clapperboard } from "lucide-react";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth();
