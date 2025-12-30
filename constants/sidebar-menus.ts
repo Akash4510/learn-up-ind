@@ -112,6 +112,16 @@ export const dashboardMenus: MenuGroup[] = [
         url: "/dashboard/community",
         icon: MessageCircle,
       },
+      {
+        label: "Contact",
+        url: "/contact",
+        icon: User,
+      },
+      {
+        label: "About us",
+        url: "/about",
+        icon: IdCard,
+      },
     ],
   },
   {

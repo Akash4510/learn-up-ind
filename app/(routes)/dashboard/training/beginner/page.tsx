@@ -24,7 +24,7 @@ const BeginnerTrainingPage = async () => {
       />
 
       <div className="max-w-[690px] rounded-lg bg-accent p-2">
-        <VideoPlayer videoUrl="https://youtu.be/X61V49uCNOI?si=6kVAa1MCH2vDjwuh" />
+        <VideoPlayer videoUrl={content.videoUrl} />
       </div>
     </div>
   );
