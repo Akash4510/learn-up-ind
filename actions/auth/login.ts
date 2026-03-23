@@ -7,12 +7,12 @@ import { signIn } from "@/auth";
 import { LoginSchema } from "@/schemas/auth";
 import { db } from "@/lib/prisma";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { generateVerificationToken } from "@/lib/tokens";
-import { sendVerificationEmail } from "@/lib/mail";
+// import { generateVerificationToken } from "@/lib/tokens";
+// import { sendVerificationEmail } from "@/lib/mail";
 
 export const login = async (
   values: LoginSchema,
-  callbackUrl?: string | null
+  callbackUrl?: string | null,
 ) => {
   const validatedFields = LoginSchema.safeParse(values);
 
@@ -42,7 +42,7 @@ export const login = async (
 
   const isPasswordCorrect = await bcrypt.compare(
     password,
-    existingUser.password
+    existingUser.password,
   );
   if (!isPasswordCorrect) {
     return {
@@ -52,23 +52,23 @@ export const login = async (
     };
   }
 
-  if (!existingUser.emailVerified) {
-    const verificationToken = await generateVerificationToken(
-      existingUser.email
-    );
+  // if (!existingUser.emailVerified) {
+  //   const verificationToken = await generateVerificationToken(
+  //     existingUser.email
+  //   );
 
-    await sendVerificationEmail(
-      verificationToken.identifier,
-      verificationToken.token
-    );
+  //   await sendVerificationEmail(
+  //     verificationToken.identifier,
+  //     verificationToken.token
+  //   );
 
-    return {
-      success: {
-        message:
-          "Confirmation email sent! Please confirm your email to log in to your account",
-      },
-    };
-  }
+  //   return {
+  //     success: {
+  //       message:
+  //         "Confirmation email sent! Please confirm your email to log in to your account",
+  //     },
+  //   };
+  // }
 
   try {
     await signIn("credentials", {
