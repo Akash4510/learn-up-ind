@@ -36,31 +36,6 @@ export const WithdrawlSuccessTemplate = ({
             textAlign: "center" as const,
           }}
         >
-          <div
-            style={{
-              marginBottom: "16px",
-              display: "inline-block",
-              padding: "12px",
-              backgroundColor: "rgba(255, 255, 255, 0.2)",
-              borderRadius: "50%",
-            }}
-          >
-            {/* Converted SVG classes to inline styles and changed color to white */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              style={{ width: "32px", height: "32px", color: "#ffffff" }}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
           <h1 style={{ color: "#ffffff", margin: 0, fontSize: "24px" }}>
             Payout Successful!
           </h1>
